@@ -208,7 +208,7 @@
       var body = { data: { type: 'subscription', attributes: {
         custom_source: 'Landing waitlist lancement',
         profile: { data: { type: 'profile', attributes: { email: email, first_name: prenom,
-          properties: { source_inscription: 'landing_waitlist', lead_score: 10 } } } }
+          properties: { source_inscription: 'landing_waitlist', lead_score: 10, date_lancement: '2026-10-20T00:00:00+02:00' } } } }
       }, relationships: { list: { data: { type: 'list', id: LIST } } } } };
 
       fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + COMPANY, { method: 'POST', headers: HEADERS, body: JSON.stringify(body) })

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dispositif CRM Halo Room</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/logo-halo-room.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/landing.css">
+<style>
+  .guide { padding: 40px 0 80px; }
+  .guide .wrap { max-width: 900px; display: grid; gap: 18px; }
+  .guide h1 { font-size: clamp(30px, 4.5vw, 46px); }
+  .guide h2 { font-size: 24px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--gris-clair); }
+  .guide h3 { font-size: 18px; margin-top: 10px; }
+  .guide p, .guide li { color: var(--gris); }
+  .guide li { margin-left: 18px; list-style: disc; }
+  .guide ul, .guide ol { display: grid; gap: 6px; }
+  .guide ol li { list-style: decimal; }
+  .guide b { color: var(--noir); font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--gris-clair); vertical-align: top; color: var(--gris); }
+  th { color: var(--noir); font-weight: 600; background: var(--rose-pale); }
+  td:first-child { color: var(--noir); font-weight: 500; }
+  code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; background: var(--rose-pale); padding: 2px 6px; border-radius: 6px; color: var(--noir); }
+  .flux { background: var(--rose-pale); border-radius: 18px; padding: 20px 22px; display: grid; gap: 10px; }
+  .flux .num { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); }
+  .flux h3 { margin: 0; }
+  .etapes-flux { display: grid; gap: 6px; }
+  .etapes-flux li { list-style: none; margin: 0; display: grid; grid-template-columns: 92px 1fr; gap: 12px; font-size: 14.5px; }
+  .etapes-flux li span:first-child { font-weight: 600; color: var(--rose); }
+  .alerte { background: #FFF4E5; border-radius: 14px; padding: 14px 18px; color: #7A4B00; font-size: 15px; }
+  .ok { background: #E8F7EE; border-radius: 14px; padding: 14px 18px; color: #1F5A38; font-size: 15px; }
+  .liens-guide { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+  .liens-guide a { text-decoration: none; font-weight: 600; color: var(--rose); }
+  .palier { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .froid { background: #ECE6E8; color: var(--noir); } .tiede { background: #FBD5E5; color: #8A1F4F; } .chaud { background: var(--rose); color: #fff; }
+  @media (max-width: 899px) { .etapes-flux li { grid-template-columns: 1fr; gap: 2px; } table { font-size: 13px; } th, td { padding: 8px; } }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Halo Room"><img src="assets/logo-halo-room.png" alt="Halo Room" width="470" height="175"></a>
+  </div>
+</header>
+
+<main class="guide">
+  <div class="wrap">
+    <span class="kicker">CRM Week ESD M2, septembre 2026</span>
+    <h1>Le dispositif CRM Halo Room</h1>
+    <p class="lead">Ce qui est monté dans le compte Klaviyo de Halo Room au 22 septembre 2026 : la base, les segments, le scoring, les trois flux, la campagne, et ce qu'on mesure. Document interne au collectif, à joindre au rendu avec le <a href="guide-landing.html">guide de la landing</a>.</p>
+    <div class="liens-guide">
+      <a href="index.html">Landing</a>
+      <a href="emails/">Les 10 emails</a>
+      <a href="guide-landing.html">Guide de la landing</a>
+    </div>
+
+    <h2>Le tunnel en une ligne</h2>
+    <p>Trafic (Instagram, Ads, parrainage) vers la <b>landing</b>, qui capte prénom et email (étape 1) puis la situation (étape 2). Chaque inscrite entre dans la <b>liste</b> « Waitlist lancement Halo Room » et reçoit le <b>lead magnet</b>. Le <b>flux 1</b> l'accueille, le <b>flux 2</b> la nourrit si elle est en cicatrisation, le <b>scoring</b> la fait passer de nouveau lead à lead engagé puis qualifié, la <b>campagne J-7</b> donne l'aperçu à tout le monde, et le <b>flux 3</b> réserve l'accès anticipé et le code aux leads qualifiés. Tout est mesuré par étape.</p>
+
+    <h2>La base : ce qu'on sait de chaque lead</h2>
+    <table>
+      <tr><th>Donnée</th><th>D'où elle vient</th><th>À quoi elle sert</th></tr>
+      <tr><td>Prénom, email</td><td>Étape 1 du formulaire</td><td>Personnalisation, envoi</td></tr>
+      <tr><td><code>situation</code> et <code>situation_code</code></td><td>Étape 2 (cicatrisation, nouveau, bijou)</td><td>Déclenche le flux 2, pèse dans le scoring, personnalise la page merci</td></tr>
+      <tr><td><code>source_inscription</code></td><td>Posée par la landing (<code>landing_waitlist</code>)</td><td>Distinguer la landing d'autres entrées futures (formulaires popup, import studio)</td></tr>
+      <tr><td><code>lead_score</code></td><td>Landing puis flux</td><td>Segments nouveau, engagé, qualifié ; filtre du flux 3</td></tr>
+      <tr><td><code>date_lancement</code></td><td>Posée à l'inscription (20 octobre 2026)</td><td>Déclencheur par date du flux 3</td></tr>
+      <tr><td>Ouvertures, clics</td><td>Klaviyo, automatique</td><td>Conditions des flux, segments d'engagement par défaut</td></tr>
+    </table>
+    <p>Liste Klaviyo : <code>VYnAjV</code> « Waitlist lancement Halo Room ». Profil de test : <code>test-landing@haloroom.fr</code>.</p>
+
+    <h2>Les 3 formulaires</h2>
+    <table>
+      <tr><th>Formulaire</th><th>Objectif (taxonomie du plan)</th><th>Où</th><th>Champs</th></tr>
+      <tr><td>1. Étape 1 de la landing</td><td><b>Capturer</b></td><td>Carte du hero, au-dessus de la flottaison</td><td>Prénom, email. Inscription immédiate à la liste, score 10</td></tr>
+      <tr><td>2. Étape 2 de la landing</td><td><b>Qualifier</b></td><td>Même carte, après l'étape 1</td><td>Situation en 3 boutons, lien « passer ». Score 20</td></tr>
+      <tr><td>3. Flyout Klaviyo « intention »</td><td><b>Identifier l'intention</b></td><td>Flyout bas droite, à 50 % de scroll, pour celles qui n'ont pas rempli la carte</td><td>« Tu veux te faire percer ou changer un bijou ? » puis email. Score 10, propriété <code>intention</code> = rdv ou bijou</td></tr>
+    </table>
+    <div class="alerte"><b>À construire dans l'éditeur Klaviyo</b> (pas d'API pour les formulaires) : le flyout n° 3, liste cible « Waitlist lancement Halo Room », propriété <code>intention</code>, déclenchement à 50 % de scroll, exclusion des profils déjà inscrits. Le script onsite est déjà sur toutes les pages, il s'affichera sans rien toucher au code.</div>
+
+    <h2>Le lead scoring</h2>
+    <p>Un score numérique sur le profil, <code>lead_score</code>. Les points s'additionnent dans le barème ; dans Klaviyo, la landing et les flux posent le palier atteint.</p>
+    <table>
+      <tr><th>Action</th><th>Points</th><th>Score atteint</th><th>Qui le pose</th></tr>
+      <tr><td>Inscription à la liste (étape 1)</td><td>+10</td><td>10</td><td>Landing</td></tr>
+      <tr><td>Réponse à « ta situation » (étape 2)</td><td>+10</td><td>20</td><td>Landing</td></tr>
+      <tr><td>Clic dans un des 3 mails de bienvenue (guide, Instagram, parrainage)</td><td>+15</td><td>35</td><td>Flux 1, branche conditionnelle à la fin</td></tr>
+      <tr><td>Situation = piercing en cicatrisation ou recherche d'un bijou (intention d'achat proche) et clic</td><td>+15</td><td>50</td><td>Flux 1, seconde branche</td></tr>
+      <tr><td>Clic sur les pièces dans le flux cicatrisation</td><td>+15</td><td>50</td><td>Flux 2, branche à la fin</td></tr>
+      <tr><td>Aucun clic sur les 3 mails de bienvenue</td><td>-10</td><td>10</td><td>Flux 1, branche « non »</td></tr>
+      <tr><td>Désinscription</td><td>Sortie</td><td>Hors liste</td><td>Klaviyo</td></tr>
+    </table>
+    <table>
+      <tr><th>Niveau</th><th>Score</th><th>Segment Klaviyo</th><th>Ce qu'on en fait</th></tr>
+      <tr><td><span class="palier froid">Nouveau lead</span></td><td>moins de 20</td><td><code>TzYDeb</code> « Nouveau lead (waitlist, score &lt; 20) »</td><td>Reçoit la bienvenue et la campagne J-7</td></tr>
+      <tr><td><span class="palier tiede">Lead engagé</span></td><td>20 à 44</td><td><code>RfLduP</code> « Lead engagé (waitlist, score 20 à 44) »</td><td>Reçoit le nurturing si en cicatrisation, la campagne J-7, et l'ouverture publique</td></tr>
+      <tr><td><span class="palier chaud">Lead qualifié</span></td><td>45 et plus</td><td><code>VQLiGR</code> « Lead qualifié (waitlist, score 45 et plus) »</td><td>Seul à recevoir le flux 3 : accès anticipé J-3, code J0, rappel J+3</td></tr>
+    </table>
+    <p>Quatrième segment, technique : <code>QVHW7C</code> « Waitlist, piercing en cours de cicatrisation », déclencheur du flux 2.</p>
+
+    <h2>Les 3 flux</h2>
+
+    <div class="flux">
+      <div class="num">Flux 1, Klaviyo <code>RuPJqF</code></div>
+      <h3>Bienvenue : que fait-on quand un nouveau prospect entre ?</h3>
+      <p><b>Déclencheur</b> : ajout à la liste « Waitlist lancement Halo Room ». <b>Objectif</b> : tenir la promesse (le guide), installer l'argument (le titane), annoncer la suite (le calendrier), et mesurer un premier signal d'intérêt.</p>
+      <ul class="etapes-flux">
+        <li><span>J0</span><span><b>Ton guide de cicatrisation</b> : le PDF, les délais par zone, ce qui arrive ensuite</span></li>
+        <li><span>J+2</span><span><b>Pourquoi je ne pose que du titane ASTM F136</b> : la norme, le nickel, les fausses « mauvaises cicatrisations »</span></li>
+        <li><span>J+5</span><span><b>Le 20 octobre, voilà comment ça se passe</b> : accès anticipé le 17, code le 20, fin le 23, parrainage</span></li>
+        <li><span>J+6</span><span><b>Branche</b> : a cliqué dans un des mails ? Oui et situation cicatrisation ou bijou : score 50. Oui sinon : score 35. Non : score 10</span></li>
+      </ul>
+    </div>
+
+    <div class="flux">
+      <div class="num">Flux 2, Klaviyo <code>YmFfcD</code></div>
+      <h3>Nurturing : que fait-on quand un prospect montre davantage d'intérêt ?</h3>
+      <p><b>Déclencheur</b> : entrée dans le segment « piercing en cours de cicatrisation » (réponse à l'étape 2). <b>Objectif</b> : être utile pendant la cicatrisation, installer Camille comme référence, amener au premier changement de bijou, qui est la première commande.</p>
+      <ul class="etapes-flux">
+        <li><span>J0</span><span><b>Les 15 premiers jours de ton piercing</b> : la routine matin et soir, normal ou pas</span></li>
+        <li><span>J+7</span><span><b>Les erreurs qui rallongent une cicatrisation</b> : cinq gestes, et « réponds avec une photo »</span></li>
+        <li><span>J+21</span><span><b>Quand changer ton bijou, et pour quoi</b> : les signes, le premier changement au studio, les pièces</span></li>
+        <li><span>J+23</span><span><b>Branche</b> : a cliqué ? Score 50</span></li>
+      </ul>
+    </div>
+
+    <div class="flux">
+      <div class="num">Flux 3, Klaviyo <code>XMCsMN</code></div>
+      <h3>Lancement : que fait-on quand un prospect est proche de la conversion ?</h3>
+      <p><b>Déclencheur</b> : par date, 3 jours avant <code>date_lancement</code> (20 octobre), à 9 h, filtré sur <code>lead_score</code> supérieur ou égal à 45. <b>Objectif</b> : convertir les leads qualifiés avec l'accès anticipé et le code, en trois temps.</p>
+      <ul class="etapes-flux">
+        <li><span>17 oct.</span><span><b>Ton accès anticipé est ouvert</b> : lien du store, trois jours avant tout le monde</span></li>
+        <li><span>20 oct.</span><span><b>C'est ouvert : ton code est actif</b> : HALO10, 10 % sur la première commande jusqu'au 23</span></li>
+        <li><span>23 oct.</span><span><b>Dernier jour pour ton code</b> : rappel court, sans pression au-delà</span></li>
+      </ul>
+    </div>
+
+    <h2>La campagne</h2>
+    <table>
+      <tr><th>Élément</th><th>Choix</th></tr>
+      <tr><td>Concept</td><td>Avant-première : sept jours avant l'ouverture, montrer les premières pièces et rappeler le calendrier</td></tr>
+      <tr><td>Cible</td><td>Toute la liste « Waitlist lancement Halo Room », quel que soit le score</td></tr>
+      <tr><td>Message</td><td>« les premières pièces de Halo Room, en avant-première » : labrets, anneaux clicker, chaînettes, tout en ASTM F136</td></tr>
+      <tr><td>Offre</td><td>Rappel du code de 10 % du 20 au 23 octobre, et du parrainage</td></tr>
+      <tr><td>CTA</td><td>Envoyer la page à une amie (WhatsApp)</td></tr>
+      <tr><td>Canal et date</td><td>Email, mardi 13 octobre 2026 à 10 h (Paris), UTM <code>j-7-premieres-pieces</code></td></tr>
+      <tr><td>Lien avec le CRM</td><td>Klaviyo <code>01M34FV2GNMXXF0CCAYD0YTVGM</code>, brouillon programmé, template assigné. Les clics alimentent le scoring</td></tr>
+    </table>
+
+    <h2>Les KPI, par étape du tunnel</h2>
+    <table>
+      <tr><th>Étape</th><th>Indicateur</th><th>Où le lire</th><th>Ordre de grandeur visé</th></tr>
+      <tr><td>Acquisition</td><td>Visites de la landing, inscriptions, taux de conversion</td><td>Klaviyo (inscriptions), analytics de la page</td><td>Médiane Unbounce 6,6 %, un formulaire en deux étapes vise 10 %</td></tr>
+      <tr><td>Acquisition</td><td>Taux de complétion de l'étape 2</td><td>Profils avec <code>situation_code</code> / profils de la liste</td><td>60 % et plus</td></tr>
+      <tr><td>Acquisition</td><td>Part venue du parrainage</td><td>Profils avec <code>?ref=amie</code> dans l'URL d'entrée</td><td>À observer, base 0</td></tr>
+      <tr><td>Qualification</td><td>Ouvertures, clics par email</td><td>Rapports de flux Klaviyo</td><td>Ouverture 40 % et plus, clic 3 à 5 % sur un flux de bienvenue</td></tr>
+      <tr><td>Qualification</td><td>Part de leads qualifiés (score 45 et plus)</td><td>Taille du segment qualifié / liste</td><td>15 à 25 % avant le 17 octobre</td></tr>
+      <tr><td>Conversion</td><td>Commandes avec HALO10, taux lead vers client, panier moyen, CA</td><td>Shopify une fois le store en ligne, code HALO10</td><td>5 % des inscrites en première commande</td></tr>
+      <tr><td>Hygiène</td><td>Désinscriptions, plaintes</td><td>Klaviyo</td><td>Moins de 0,5 % par envoi</td></tr>
+    </table>
+    <p>Les ordres de grandeur sont des repères de marché, pas des objectifs contractuels : la base part de zéro, on recalibre après la première semaine.</p>
+
+    <h2>Le guide d'entretien (recherche utilisateur)</h2>
+    <p>À faire passer à 4 ou 5 personnes de la cible avant jeudi, 15 minutes chacune, en visio ou au téléphone. Une personne mène, une autre note. On cherche des mots, pas des chiffres.</p>
+    <ol>
+      <li><b>Raconte-moi ton dernier piercing.</b> Où, pourquoi là, comment tu as choisi le studio. (déclencheurs, critères de choix)</li>
+      <li><b>Comment s'est passée la cicatrisation ?</b> Qu'est-ce que tu as fait, qu'est-ce qui t'a inquiétée, où as-tu cherché des réponses ? (freins, besoins d'information, canaux)</li>
+      <li><b>Où achètes-tu tes bijoux de piercing aujourd'hui, et à quel prix ?</b> Qu'est-ce qui te ferait changer ? (concurrence, prix de référence, motivations)</li>
+      <li><b>Le mot « titane ASTM F136 », ça te dit quelque chose ?</b> Si on te dit que c'est le titane des implants chirurgicaux, ça change quoi pour toi ? (test de l'argument central)</li>
+      <li><b>Si un studio t'envoyait des emails, qu'est-ce que tu accepterais de recevoir, et à quelle fréquence ?</b> Qu'est-ce qui te ferait te désinscrire ? (attentes CRM, tolérance)</li>
+    </ol>
+    <p>Sortie attendue pour la slide 10 : 3 à 5 enseignements, chacun appuyé d'une citation. Ils valident ou corrigent le persona, l'argument titane, le lead magnet et la fréquence des flux.</p>
+
+    <h2>Ce qui reste à faire dans Klaviyo, à la main</h2>
+    <ul>
+      <li><b>Passer la liste en simple opt-in</b> : Audience, Lists, la liste, Settings. Sinon le premier mail attend la confirmation.</li>
+      <li><b>Vérifier l'expéditeur</b> <code>bonjour@haloroom.fr</code> ou le remplacer par une adresse réelle. Sans domaine vérifié, Klaviyo envoie depuis son domaine partagé.</li>
+      <li><b>Construire le flyout n° 3</b> dans l'éditeur de formulaires.</li>
+      <li><b>Relire les 3 flux et la campagne</b> (tout est en brouillon, rien ne part) puis les passer en « live » le jour où le groupe décide.</li>
+      <li><b>Créer le code HALO10</b> dans Shopify quand le store existe : 10 %, première commande, du 20 au 23 octobre.</li>
+    </ul>
+    <div class="ok">Tout ce qui est décrit ici existe dans le compte Klaviyo Halo Room (UDkQQD) au 22 septembre : liste, 4 segments, 10 templates, 3 flux en brouillon, 1 campagne programmée en brouillon. Les templates sont écrits en HTML à la main, sans modèle Klaviyo.</div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <img src="assets/logo-halo-room.png" alt="Halo Room" width="470" height="175">
+    <nav aria-label="Pied de page">
+      <a href="index.html">Landing</a>
+      <a href="guide-landing.html">Guide de la landing</a>
+      <a href="emails/">Emails</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
