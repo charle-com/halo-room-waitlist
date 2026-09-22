@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halo Room, CRM Week : point d'équipe</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/logo-halo-room.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/landing.css">
+<style>
+  .guide { padding: 40px 0 80px; }
+  .guide .wrap { max-width: 860px; display: grid; gap: 18px; }
+  .guide h1 { font-size: clamp(30px, 4.5vw, 46px); }
+  .guide h2 { font-size: 24px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--gris-clair); }
+  .guide p, .guide li { color: var(--gris); }
+  .guide li { margin-left: 18px; list-style: disc; }
+  .guide ul { display: grid; gap: 8px; }
+  .guide b { color: var(--noir); font-weight: 600; }
+  .guide a { color: var(--rose); font-weight: 600; text-decoration: none; }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--gris-clair); vertical-align: top; color: var(--gris); }
+  th { color: var(--noir); font-weight: 600; background: var(--rose-pale); }
+  td:first-child { color: var(--noir); font-weight: 500; }
+  .fait { display: grid; gap: 10px; }
+  .fait li { list-style: none; margin: 0; display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  .fait svg { width: 18px; height: 18px; color: var(--rose); margin-top: 4px; }
+  .carte { background: var(--rose-pale); border-radius: 18px; padding: 20px 22px; display: grid; gap: 10px; }
+  .carte h3 { margin: 0; font-size: 18px; }
+  .alerte { background: #FFF4E5; border-radius: 14px; padding: 14px 18px; color: #7A4B00; font-size: 15px; }
+  .lien-principal { display: grid; gap: 6px; background: var(--noir); color: var(--blanc); border-radius: 18px; padding: 20px 22px; }
+  .lien-principal a { color: var(--blanc); font-size: 18px; word-break: break-all; }
+  .lien-principal span { font-size: 13px; color: #C9C9CE; }
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--rose-clair); color: #8A1F4F; white-space: nowrap; }
+  @media (max-width: 899px) { table { font-size: 13px; } th, td { padding: 8px; } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+</svg>
+
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Halo Room"><img src="assets/logo-halo-room.png" alt="Halo Room" width="470" height="175"></a>
+  </div>
+</header>
+
+<main class="guide">
+  <div class="wrap">
+    <span class="kicker">CRM Week ESD M2, point du mardi 22 septembre</span>
+    <h1>Halo Room : où on en est, ce qui reste</h1>
+    <p class="lead">Tout ce qui touche à la landing et à Klaviyo est monté et en ligne. Il reste la recherche utilisateur, la partie Ads, trois réglages à la main dans Klaviyo et le deck. Pitch vendredi 25, 10 minutes.</p>
+
+    <div class="lien-principal">
+      <span>La landing, en ligne et fonctionnelle</span>
+      <a href="https://charle-com.github.io/halo-room-waitlist/">charle-com.github.io/halo-room-waitlist</a>
+      <span>Le formulaire inscrit pour de vrai dans le compte Klaviyo Halo Room. Testez avec votre adresse, vous verrez le profil arriver dans la liste.</span>
+    </div>
+
+    <h2>Ce qui est fait</h2>
+    <ul class="fait">
+      <li><svg><use href="#i-check"/></svg><span><b>Landing waitlist</b> dans la charte Halo Room, formulaire en deux étapes branché sur Klaviyo, page de remerciement avec parrainage, politique de confidentialité et mentions légales. <a href="index.html">Voir</a></span></li>
+      <li><svg><use href="#i-check"/></svg><span><b>Guide de la landing</b> : chaque bloc, pourquoi il est là, les sources (HubSpot, Unbounce), le plan de tests A/B. C'est la matière des slides 13 à 16. <a href="guide-landing.html">Lire</a></span></li>
+      <li><svg><use href="#i-check"/></svg><span><b>Klaviyo</b> : la liste, 4 segments (nouveau, engagé, qualifié, cicatrisation), le barème de scoring, 3 flux de 3 mails en brouillon, la campagne J-7 programmée en brouillon. Tout en HTML à la main, sans template.</span></li>
+      <li><svg><use href="#i-check"/></svg><span><b>Dispositif CRM</b> : base, formulaires, scoring, flux, campagne, tableau KPI, guide d'entretien. C'est la matière des slides 17 à 25. <a href="dispositif-crm.html">Lire</a></span></li>
+      <li><svg><use href="#i-check"/></svg><span><b>Les 10 emails</b> en lecture, avec objets et pré-en-têtes. <a href="emails/">Lire</a></span></li>
+    </ul>
+
+    <h2>Ce qui reste, et qui peut le prendre</h2>
+    <table>
+      <tr><th>Chantier</th><th>Quoi, concrètement</th><th>Pour quand</th><th>Qui</th></tr>
+      <tr><td>Interviews persona</td><td>4 ou 5 filles de la cible, 15 minutes chacune, avec le <a href="dispositif-crm.html#guide">guide d'entretien</a> en 5 questions. Une mène, une note. Sortie : 3 à 5 enseignements avec citations (slides 9 et 10), puis le persona (slide 11).</td><td>Jeudi midi</td><td><span class="tag">à répartir</span></td></tr>
+      <tr><td>Partie Ads</td><td>Slides 12 à 14 du plan : Meta et Google Ads, 3 angles (produit, univers, problème), concepts de créas et le tunnel Ads vers CRM. C'est le seul gros bloc qui n'a rien de produit.</td><td>Jeudi</td><td><span class="tag">à répartir</span></td></tr>
+      <tr><td>Réglages Klaviyo à la main</td><td>Liste en simple opt-in (Audience, Lists, Settings). Adresse expéditrice à vérifier ou remplacer. Flyout n° 3 « intention » à construire dans l'éditeur de formulaires, spécifié dans le dispositif.</td><td>Mercredi</td><td><span class="tag">Jack (compte)</span></td></tr>
+      <tr><td>Deck Canva</td><td>Remplir les slides avec la matière ci-dessous. Une idée par slide, les captures de la landing et de Klaviyo en visuel.</td><td>Jeudi soir</td><td><span class="tag">à répartir</span></td></tr>
+      <tr><td>Répétition</td><td>10 minutes chrono, une voix par partie, la démo du formulaire en direct sur la landing.</td><td>Vendredi matin</td><td><span class="tag">tous</span></td></tr>
+    </table>
+
+    <h2>Où trouver la matière de chaque slide</h2>
+    <table>
+      <tr><th>Slide du plan</th><th>Source</th></tr>
+      <tr><td>3 à 8 : contexte, problème, problématique, objectif, stratégie, approche</td><td>Déjà rédigées dans le plan Canva. Le tunnel de la slide 7 est repris en une ligne en tête du <a href="dispositif-crm.html">dispositif</a>.</td></tr>
+      <tr><td>9 à 11 : recherche utilisateur, enseignements, persona</td><td>Guide d'entretien dans le dispositif. Le reste vient des interviews.</td></tr>
+      <tr><td>12 à 14 : Ads, créas, tunnel Ads vers CRM</td><td>À produire.</td></tr>
+      <tr><td>13 : proposition de valeur</td><td>« Le job de la page » dans le <a href="guide-landing.html">guide de la landing</a> : cible, promesse, échange.</td></tr>
+      <tr><td>14 : lead magnet</td><td>« Le guide de cicatrisation, zone par zone » : nom, promesse, contenu, bénéfice, CTA. Guide de la landing, bloc 3, et email F1-M1.</td></tr>
+      <tr><td>15 : landing page</td><td>La landing elle-même, et les 9 blocs du guide.</td></tr>
+      <tr><td>16 : les 3 formulaires</td><td>Tableau « Les 3 formulaires » du dispositif : capturer, qualifier, identifier l'intention.</td></tr>
+      <tr><td>17 : base CRM</td><td>Tableau « La base » du dispositif.</td></tr>
+      <tr><td>18 : segmentation</td><td>Tableau des paliers : nouveau lead, lead engagé, lead qualifié.</td></tr>
+      <tr><td>19 : lead scoring</td><td>Tableau du barème (action, points, score, qui le pose).</td></tr>
+      <tr><td>20 à 23 : nurturing et les 3 workflows</td><td>Les trois encadrés de flux du dispositif, et les emails.</td></tr>
+      <tr><td>24 : campagne</td><td>Tableau « La campagne » : concept, cible, message, offre, CTA, canal, lien CRM.</td></tr>
+      <tr><td>25 : KPI</td><td>Tableau « Les KPI, par étape du tunnel ».</td></tr>
+      <tr><td>26 à 28 : plan d'action, workflow global, conclusion</td><td>Le plan d'action = le tableau « ce qui reste » ci-dessus, projeté sur les semaines avant le 20 octobre. Le workflow global = la première ligne du dispositif.</td></tr>
+    </table>
+
+    <h2>À trancher ensemble</h2>
+    <ul>
+      <li><b>Les témoignages de la landing sont fictifs.</b> Soit on le dit au pitch (« à remplacer par les avis réels de Camille »), soit Jack récupère 3 vrais avis d'ici jeudi et on les remplace.</li>
+      <li><b>La date d'ouverture, le 20 octobre</b>, est celle qu'on a prise. Si Jack a une autre date, tout se décale (landing, mails, flux 3, campagne), c'est une heure de travail.</li>
+      <li><b>L'offre de lancement</b> : 10 % sur la première commande, code HALO10, trois jours. Alternative possible pour le test A/B : livraison offerte.</li>
+      <li><b>L'expéditeur</b> « Camille de Halo Room » avec l'adresse bonjour@haloroom.fr, fictive. Si Camille préfère une autre adresse ou un autre prénom d'expéditeur, on change en une fois dans les flux.</li>
+    </ul>
+
+    <div class="alerte">Tout est en brouillon dans Klaviyo : aucun email ne part tant qu'on ne passe pas les flux en « live ». Les tests d'inscription sur la landing créent de vrais profils dans la liste, c'est normal, ils servent à la démo.</div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <img src="assets/logo-halo-room.png" alt="Halo Room" width="470" height="175">
+    <nav aria-label="Pied de page">
+      <a href="index.html">Landing</a>
+      <a href="guide-landing.html">Guide de la landing</a>
+      <a href="dispositif-crm.html">Dispositif CRM</a>
+      <a href="emails/">Emails</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
