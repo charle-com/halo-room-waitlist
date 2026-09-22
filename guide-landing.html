@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide de la landing Halo Room</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/logo-halo-room.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/landing.css">
+<style>
+  .guide { padding: 40px 0 80px; }
+  .guide .wrap { max-width: 860px; display: grid; gap: 18px; }
+  .guide h1 { font-size: clamp(30px, 4.5vw, 46px); }
+  .guide h2 { font-size: 24px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--gris-clair); }
+  .guide h3 { font-size: 18px; margin-top: 8px; }
+  .guide p, .guide li { color: var(--gris); }
+  .guide li { margin-left: 18px; list-style: disc; }
+  .guide ul { display: grid; gap: 6px; }
+  .guide b { color: var(--noir); font-weight: 600; }
+  .bloc { background: var(--rose-pale); border-radius: 18px; padding: 20px 22px; display: grid; gap: 10px; }
+  .bloc .num { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); }
+  .bloc h3 { margin: 0; }
+  .ligne { display: grid; grid-template-columns: 110px 1fr; gap: 12px; font-size: 15px; }
+  .ligne span:first-child { font-weight: 600; color: var(--noir); }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--gris-clair); vertical-align: top; color: var(--gris); }
+  th { color: var(--noir); font-weight: 600; background: var(--rose-pale); }
+  td:first-child { color: var(--noir); font-weight: 500; }
+  code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; background: var(--rose-pale); padding: 2px 6px; border-radius: 6px; color: var(--noir); }
+  .liens-guide { display: flex; flex-wrap: wrap; gap: 10px; }
+  .liens-guide a { text-decoration: none; font-weight: 600; color: var(--rose); }
+  .alerte { border-left: 0; background: #FFF4E5; border-radius: 14px; padding: 14px 18px; color: #7A4B00; font-size: 15px; }
+  @media (max-width: 899px) { .ligne { grid-template-columns: 1fr; gap: 2px; } table { font-size: 13px; } th, td { padding: 8px; } }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Halo Room"><img src="assets/logo-halo-room.png" alt="Halo Room" width="470" height="175"></a>
+  </div>
+</header>
+
+<main class="guide">
+  <div class="wrap">
+    <span class="kicker">CRM Week ESD M2, septembre 2026</span>
+    <h1>Guide de la landing Halo Room</h1>
+    <p class="lead">Ce que fait chaque bloc de la page, pourquoi il est là, et sur quoi on s'appuie. Document interne au collectif, à joindre au rendu.</p>
+    <div class="liens-guide">
+      <a href="index.html">Voir la landing</a>
+      <a href="merci.html?prenom=L%C3%A9a&s=cicatrisation">Voir la page de remerciement</a>
+      <a href="confidentialite.html">Politique de confidentialité</a>
+    </div>
+
+    <h2>Le job de la page</h2>
+    <p>Un seul objectif : <b>transformer une visiteuse en inscrite à la liste d'attente</b> du store Halo Room, qui ouvre le 20 octobre 2026. Tout le reste (vendre un bijou, prendre un rendez-vous, suivre Instagram) est volontairement repoussé après l'inscription, sur la page de remerciement ou dans les emails.</p>
+    <div class="ligne"><span>Cible</span><span>Femmes de 18 à 30 ans, Essonne et sud de l'Île-de-France, déjà percées ou en projet, actives sur Instagram, sensibles à l'hygiène et aux matériaux.</span></div>
+    <div class="ligne"><span>Promesse</span><span>Des bijoux de piercing en titane ASTM F136 choisis par une perceuse professionnelle, accessibles avant tout le monde.</span></div>
+    <div class="ligne"><span>Échange</span><span>Ton email contre le guide de cicatrisation (lead magnet), trois jours d'accès anticipé et 10 % le jour J.</span></div>
+    <div class="ligne"><span>KPI principal</span><span>Taux de conversion visiteuse vers inscrite. Secondaires : taux de complétion de l'étape 2, taux de rebond, temps sur page, part d'inscrites venues du parrainage (<code>?ref=amie</code>).</span></div>
+
+    <h2>Les blocs, dans l'ordre de lecture</h2>
+
+    <div class="bloc">
+      <div class="num">Bloc 1</div>
+      <h3>Header : le logo, rien d'autre</h3>
+      <p>Pas de menu, pas d'icônes panier ou compte, pas de lien vers le site. Une landing enlève la navigation pour ne laisser qu'une sortie : le formulaire. C'est la règle numéro un de HubSpot et de toutes les études de conversion.</p>
+    </div>
+
+    <div class="bloc">
+      <div class="num">Bloc 2</div>
+      <h3>Hero : date, titre, trois puces</h3>
+      <p><b>« Ouverture le 20 octobre »</b> pose l'urgence réelle. Le titre vend le bénéfice (avoir accès avant tout le monde) et porte le mot-clé de différenciation (titane ASTM F136). Les trois puces résument l'offre en moins de dix secondes : guide offert, accès anticipé, 10 %. Le paragraphe long de la première version a été remplacé par ces puces, plus rapides à lire sur mobile.</p>
+    </div>
+
+    <div class="bloc">
+      <div class="num">Bloc 3</div>
+      <h3>Formulaire en deux étapes</h3>
+      <p><b>Étape 1 : prénom et email</b>, bouton « Je veux mon accès anticipé ». À la validation, la personne est inscrite dans Klaviyo immédiatement : même si elle quitte la page ensuite, l'email est capté. <b>Étape 2 : « ta situation »</b> en trois boutons (piercing en cours de cicatrisation, envie d'un nouveau piercing, recherche d'un bijou), avec un lien « passer ». La réponse enrichit le profil Klaviyo et sert au lead scoring et à la personnalisation des flux.</p>
+      <p>Pourquoi deux étapes : d'après le benchmark Unbounce (41 000 landings), un formulaire à un champ convertit à 13,4 %, à trois champs 10,1 %, et un formulaire multi-étapes fait 21 % de mieux qu'un formulaire identique en une seule page. On garde donc trois informations, mais on les demande en deux temps.</p>
+      <p>Le libellé du bouton est un bénéfice (« mon accès anticipé »), pas un engagement (« je m'inscris »). La mention de consentement et le lien vers la politique de confidentialité sont collés sous le bouton : signal de confiance RGPD au moment exact où la personne hésite.</p>
+    </div>
+
+    <div class="bloc">
+      <div class="num">Bloc 4</div>
+      <h3>Photo</h3>
+      <p>La photo d'oreille du site Halo Room, celle de la vraie cliente avec les pièces en titane. Pas de banque d'images : la preuve visuelle du produit, dans la charte de la marque. Sur mobile elle passe sous le formulaire pour que le bouton reste visible sans scroller.</p>
+    </div>
+
+    <div class="bloc">
+      <div class="num">Bloc 5</div>
+      <h3>Bandeau de preuves</h3>
+      <p>Les quatre arguments du site actuel, repris tels quels : titane de qualité professionnelle, sélection par une perceuse professionnelle, livraison rapide depuis la France, studio en Essonne. Ce bandeau existe déjà sur la home du store, on garde la continuité.</p>
+    </div>
+
+    <div class="bloc">
+      <div class="num">Bloc 6</div>
+      <h3>« Ce que la liste d'attente te réserve »</h3>
+      <p>Les trois bénéfices, développés d'une phrase chacun, dans l'ordre chronologique où ils arrivent. Le CTA est répété ici : une landing répète son unique appel à l'action à chaque écran, elle n'en ajoute jamais un autre.</p>
+    </div>
+
+    <div class="bloc">
+      <div class="num">Bloc 7</div>
+      <h3>Témoignages</h3>
+      <p>Trois avis de clientes du studio, un mis en avant et deux plus courts. La preuve sociale est l'élément qui pèse le plus sur la conversion après le formulaire lui-même.</p>
+      <div class="alerte"><b>À dire dans le rendu :</b> ces trois témoignages sont fictifs, écrits pour le cas d'école. Avant une mise en ligne réelle, les remplacer par des avis réels de Camille (Google, Instagram), avec l'accord des clientes.</div>
+    </div>
+
+    <div class="bloc">
+      <div class="num">Bloc 8</div>
+      <h3>Camille et le titane ASTM F136</h3>
+      <p>La crédibilité : qui choisit les bijoux et pourquoi cette matière. C'est l'argument de fond de Halo Room face aux bijoux fantaisie, et la réponse à l'objection « pourquoi payer plus cher ».</p>
+    </div>
+
+    <div class="bloc">
+      <div class="num">Bloc 9</div>
+      <h3>Dernier appel et footer</h3>
+      <p>Une phrase, le CTA une troisième fois. Le footer ne contient que les mentions légales et la politique de confidentialité, obligatoires, et rien qui fasse sortir de la page.</p>
+    </div>
+
+    <h2>La page de remerciement</h2>
+    <p>Elle s'affiche après l'étape 2 (ou après « passer »). Elle est personnalisée avec le prénom et adapte sa première phrase à la situation choisie. Elle contient dans l'ordre : le téléchargement du guide (la promesse tenue tout de suite), les trois prochaines étapes datées (ce qui arrive et quand), un <b>bloc parrainage</b> (partage WhatsApp et copie du lien, taggé <code>?ref=amie</code> pour mesurer), puis le seul lien sortant du parcours, Instagram. C'est ici, et pas avant, qu'on autorise la personne à quitter la page.</p>
+
+    <h2>Ce qui se passe dans Klaviyo</h2>
+    <table>
+      <tr><th>Moment</th><th>Appel</th><th>Ce qui est écrit sur le profil</th></tr>
+      <tr><td>Étape 1 validée</td><td>Souscription à la liste <code>Waitlist lancement Halo Room</code></td><td>email, prénom, <code>source_inscription = landing_waitlist</code>, <code>lead_score = 10</code></td></tr>
+      <tr><td>Étape 2 choisie</td><td>Mise à jour du profil</td><td><code>situation</code> (libellé), <code>situation_code</code> (cicatrisation, nouveau ou bijou), <code>lead_score = 20</code></td></tr>
+      <tr><td>Toute la visite</td><td>Script onsite Klaviyo</td><td>Permet d'afficher les formulaires popup et flyout construits dans Klaviyo, et de suivre l'activité sur le site</td></tr>
+    </table>
+    <p>L'ajout à la liste est le déclencheur du flux de bienvenue. La propriété <code>situation_code</code> sert de condition pour le flux de nurturing cicatrisation et pour le segment des leads chauds.</p>
+    <div class="alerte"><b>Réglage à faire dans Klaviyo :</b> la liste est en double opt-in par défaut. Tant que c'est le cas, le premier email ne part qu'après le clic de confirmation. Pour un envoi immédiat du guide, passer la liste en simple opt-in (Audience, Lists, la liste, Settings).</div>
+
+    <h2>Ce qu'on testera en A/B</h2>
+    <p>Une landing s'optimise après sa mise en ligne, pas avant. Les tests à lancer dans l'ordre, un à la fois, sur au moins deux semaines chacun :</p>
+    <ul>
+      <li><b>Le titre</b> : bénéfice (« avant tout le monde ») contre produit (« Bijoux de piercing en titane ASTM F136 »).</li>
+      <li><b>Le bouton</b> : « Je veux mon accès anticipé » contre « Recevoir le guide offert ».</li>
+      <li><b>La longueur du formulaire</b> : deux étapes contre email seul, la situation posée dans le premier email.</li>
+      <li><b>L'offre</b> : 10 % contre livraison offerte sur la première commande.</li>
+    </ul>
+
+    <h2>Ce qu'on a appliqué, et d'où ça vient</h2>
+    <table>
+      <tr><th>Principe</th><th>Application sur la page</th><th>Source</th></tr>
+      <tr><td>Navigation minimale, un seul CTA</td><td>Header logo seul, CTA répété trois fois, aucun lien sortant avant la page merci</td><td>HubSpot, « Qu'est-ce qu'une landing page »</td></tr>
+      <tr><td>Tout l'essentiel au-dessus de la flottaison, mobile d'abord</td><td>Titre, puces et bouton visibles sans scroller à 390 px</td><td>HubSpot</td></tr>
+      <tr><td>Moins de champs, formulaire multi-étapes</td><td>Deux étapes, trois informations, inscription dès l'étape 1</td><td>Unbounce, benchmark de conversion 2025</td></tr>
+      <tr><td>Preuve sociale visible</td><td>Bloc témoignages (fictifs, voir plus haut)</td><td>Guides waitlist Flowjam et Moosend</td></tr>
+      <tr><td>Confiance RGPD près du bouton</td><td>Consentement et lien confidentialité sous le CTA, vraie page de politique</td><td>Heyflow, lead gen 2026</td></tr>
+      <tr><td>Page de remerciement avec liens sortants et parrainage</td><td>merci.html : guide, étapes, WhatsApp et copie du lien, Instagram</td><td>HubSpot, Flowjam</td></tr>
+      <tr><td>Bouton libellé en bénéfice</td><td>« Je veux mon accès anticipé »</td><td>Heyflow</td></tr>
+    </table>
+
+    <h2>Fiche technique</h2>
+    <ul>
+      <li>HTML et CSS à la main, aucun template, aucun framework. Une feuille de style partagée par les cinq pages.</li>
+      <li>Charte du logo Halo Room : rose <code>#FD4795</code>, fond <code>#FEF6F8</code>, titres Playfair Display, corps Montserrat, étoile à quatre branches en motif.</li>
+      <li>Hébergement GitHub Pages, dépôt public <code>charle-com/halo-room-waitlist</code>. Balise <code>noindex</code> sur toutes les pages : c'est un cas d'école, pas une page à référencer.</li>
+      <li>Testé à 390 px (mobile) et 1280 px (desktop), aucun défilement horizontal, parcours d'inscription vérifié de bout en bout sur le compte Klaviyo Halo Room.</li>
+    </ul>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <img src="assets/logo-halo-room.png" alt="Halo Room" width="470" height="175">
+    <nav aria-label="Pied de page">
+      <a href="index.html">Landing</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
