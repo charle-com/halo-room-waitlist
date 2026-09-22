@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bienvenue dans la liste d'attente Halo Room</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/logo-halo-room.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/landing.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-spark" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5c.6 5.7 4.8 9.9 10.5 10.5C16.8 12.6 12.6 16.8 12 22.5 11.4 16.8 7.2 12.6 1.5 12 7.2 11.4 11.4 7.2 12 1.5Z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+  <symbol id="i-insta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></symbol>
+</svg>
+
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Halo Room"><img src="assets/logo-halo-room.png" alt="Halo Room" width="470" height="175"></a>
+  </div>
+</header>
+
+<main class="merci">
+  <div class="wrap">
+    <span class="kicker"><svg><use href="#i-spark"/></svg>C'est noté</span>
+    <h1 id="titre">Bienvenue dans la liste</h1>
+    <p class="lead" id="intro">Ton guide de cicatrisation est prêt. Le reste arrive par email.</p>
+    <a class="btn" href="assets/guide-de-cicatrisation-halo-room.pdf" download><svg><use href="#i-download"/></svg>Télécharger le guide</a>
+    <ul class="etapes">
+      <li><svg><use href="#i-spark"/></svg><span><b>Dans quelques minutes</b> : un premier email de Camille, avec le guide en pièce jointe et ce qu'elle pose au studio.</span></li>
+      <li><svg><use href="#i-spark"/></svg><span><b>Le 17 octobre</b> : ton accès anticipé au store, trois jours avant l'ouverture publique.</span></li>
+      <li><svg><use href="#i-spark"/></svg><span><b>Le 20 octobre</b> : ton code de 10 %, valable trois jours.</span></li>
+    </ul>
+    <div class="parrainage">
+      <h2>Une amie qui se fait percer bientôt ?</h2>
+      <p>Envoie-lui la page : elle reçoit le guide et son accès anticipé, comme toi.</p>
+      <div class="liens">
+        <a class="btn" id="whatsapp" href="#" target="_blank" rel="noopener">Partager sur WhatsApp</a>
+        <button class="btn ghost" type="button" id="copier">Copier le lien</button>
+      </div>
+      <div class="copie" id="copie"></div>
+    </div>
+    <p class="lead">En attendant, les coulisses du studio sont sur Instagram.</p>
+    <div class="liens">
+      <a class="btn ghost" href="https://www.instagram.com/halo.room_/" target="_blank" rel="noopener"><svg><use href="#i-insta"/></svg>@halo.room_</a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <img src="assets/logo-halo-room.png" alt="Halo Room" width="470" height="175">
+    <nav aria-label="Pied de page">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+      <span>Halo Room, Essonne</span>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var q = new URLSearchParams(window.location.search);
+    var prenom = (q.get('prenom') || '').replace(/[<>]/g, '').trim();
+    var s = q.get('s');
+    if (prenom) document.getElementById('titre').textContent = 'Bienvenue, ' + prenom;
+    var intro = document.getElementById('intro');
+    if (s === 'cicatrisation') intro.textContent = 'Ton guide de cicatrisation est prêt, il te servira dès ce soir. Le reste arrive par email.';
+    if (s === 'nouveau') intro.textContent = 'Ton guide est prêt, garde-le pour après le rendez-vous. Le reste arrive par email.';
+    if (s === 'bijou') intro.textContent = 'Ton guide est prêt. Tu verras les pièces avant tout le monde, le reste arrive par email.';
+    var lien = window.location.href.replace(/merci\.html.*$/, 'index.html?ref=amie');
+    var texte = 'Halo Room ouvre le 20 octobre : bijoux de piercing en titane ASTM F136. Inscris-toi, tu as le guide de cicatrisation offert et un accès anticipé : ' + lien;
+    document.getElementById('whatsapp').href = 'https://wa.me/?text=' + encodeURIComponent(texte);
+    document.getElementById('copier').addEventListener('click', function () {
+      navigator.clipboard.writeText(lien).then(function () { document.getElementById('copie').textContent = 'Lien copié.'; });
+    });
+  })();
+</script>
+<script async src="https://static.klaviyo.com/onsite/js/UDkQQD/klaviyo.js"></script>
+</body>
+</html>
