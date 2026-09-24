@@ -179,3 +179,10 @@ ul { margin: 0; padding: 0; }
   .temoignages { grid-template-columns: 1.4fr 1fr 1fr; align-items: stretch; }
   .temoignage.principal p { font-size: 26px; }
 }
+
+/* Guide de cicatrisation */
+.guide { background: var(--rose-pale); }
+.delais { display: grid; gap: 0; border-top: 1px solid var(--rose-clair); }
+.delais li { list-style: none; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--rose-clair); }
+.delais span { font-size: 16px; color: var(--gris); }
+.delais b { font-family: var(--display); font-size: 24px; font-weight: 600; color: var(--noir); }
