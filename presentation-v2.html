@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halo Room, stratégie CRM</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/logo-halo-room.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,700;0,800;1,500;1,700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,800..900,100,1&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #FD4795; --rose-vif: #F03FA0; --rose-pale: #FEF6F8; --rose-clair: #FBD5E5; --rose-moyen: #FDE3EE;
+    --noir: #1D1D1F; --gris: #5B5B60; --blanc: #FFFFFF;
+    --titre: "EB Garamond", Georgia, serif;
+    --groovy: "Fraunces", "EB Garamond", Georgia, serif;
+    --corps: "Montserrat", -apple-system, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #0E0E10; overflow: hidden; }
+  body { font-family: var(--corps); color: var(--noir); -webkit-font-smoothing: antialiased; }
+  #stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: center; }
+  .s { position: absolute; inset: 0; background: var(--rose-pale); padding: 110px 128px 130px; display: none; flex-direction: column; overflow: hidden; }
+  .s.on { display: flex; }
+  .s.blanc { background: var(--blanc); }
+  .s.noir { background: var(--noir); color: var(--blanc); }
+  .s.rose { background: var(--rose); color: var(--blanc); }
+
+  /* Typo */
+  .kicker { display: flex; align-items: center; gap: 14px; font-size: 22px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--rose); margin-bottom: 22px; }
+  .kicker svg { width: 26px; height: 26px; }
+  .noir .kicker { color: var(--rose); }
+  h1 { font-family: var(--titre); font-weight: 700; font-size: 150px; line-height: .95; letter-spacing: -0.01em; }
+  h2 { font-family: var(--titre); font-weight: 700; font-size: 84px; line-height: 1.02; letter-spacing: -0.01em; max-width: 1500px; }
+  h1 em, h2 em { font-style: italic; font-weight: 500; }
+  .groovy { font-family: var(--groovy); font-weight: 900; font-variation-settings: "SOFT" 100, "WONK" 1; color: var(--rose); letter-spacing: -0.01em; }
+  .lead { font-size: 32px; line-height: 1.45; color: var(--gris); margin-top: 22px; max-width: 1350px; }
+  .noir .lead { color: #C9C9CE; }
+  .rose .lead { color: #FFE3F0; }
+
+  /* Blocs */
+  .body { margin-top: 56px; flex: 1; display: flex; gap: 48px; min-height: 0; align-items: flex-start; }
+  .grid { display: grid; gap: 28px; width: 100%; }
+  .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: repeat(3, 1fr); } .g4 { grid-template-columns: repeat(4, 1fr); } .g5 { grid-template-columns: repeat(5, 1fr); } .g6 { grid-template-columns: repeat(6, 1fr); }
+  .card { background: var(--blanc); border-radius: 36px; padding: 40px 38px; display: grid; gap: 14px; align-content: start; }
+  .blanc .card { background: var(--rose-pale); }
+  .noir .card { background: #2A2A2D; }
+  .card.r { background: var(--rose); color: var(--blanc); }
+  .card.r p, .card.r .lab { color: var(--blanc); }
+  .card h3 { font-family: var(--titre); font-size: 44px; font-weight: 700; line-height: 1.05; }
+  .card p { font-size: 25px; line-height: 1.45; color: var(--gris); }
+  .noir .card p { color: #C9C9CE; }
+  .lab { font-size: 19px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--rose); display: flex; align-items: center; gap: 10px; }
+  .lab svg { width: 20px; height: 20px; }
+  .num { font-family: var(--groovy); font-weight: 900; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: 88px; line-height: .9; color: var(--rose); }
+  .card.r .num { color: var(--blanc); }
+
+  ul.stars { list-style: none; display: grid; gap: 22px; }
+  ul.stars li { display: grid; grid-template-columns: 34px 1fr; gap: 18px; font-size: 30px; line-height: 1.4; align-items: start; }
+  ul.stars li svg { width: 30px; height: 30px; margin-top: 6px; }
+  ul.stars b { font-weight: 600; }
+  .noir ul.stars li { color: #E5E5EA; }
+
+  .pill { display: inline-flex; align-items: center; justify-content: center; background: var(--rose); color: var(--blanc); border-radius: 999px; padding: 22px 44px; font-size: 28px; font-weight: 500; white-space: nowrap; }
+  .pill.w { background: var(--blanc); color: var(--noir); }
+  .pill.ghost { background: transparent; color: var(--noir); border: 2px solid var(--rose-clair); }
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 16px; }
+  .flow .arr { color: var(--rose); font-size: 34px; font-weight: 700; }
+
+  .photo { border-radius: 56px; overflow: hidden; flex: none; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .phone { flex: none; width: 360px; height: 740px; border-radius: 48px; border: 10px solid var(--noir); overflow: hidden; background: var(--blanc); box-shadow: 0 40px 80px -40px rgba(253, 71, 149, .55); }
+  .phone img { width: 100%; display: block; }
+  .shot { flex: none; border-radius: 28px; overflow: hidden; box-shadow: 0 40px 80px -40px rgba(253, 71, 149, .55); background: var(--blanc); }
+  .shot img { width: 100%; display: block; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 27px; }
+  th { text-align: left; font-size: 18px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--rose); padding: 0 26px 18px; }
+  td { padding: 22px 26px; border-top: 1px solid var(--rose-clair); color: var(--gris); vertical-align: top; line-height: 1.35; }
+  td:first-child { color: var(--noir); font-weight: 600; border-left: 5px solid var(--rose); }
+  tr.tot td { font-weight: 700; color: var(--noir); }
+  .tbl { background: var(--blanc); border-radius: 36px; padding: 36px 20px 20px; width: 100%; }
+  .blanc .tbl { background: var(--rose-pale); }
+
+  .trust { position: absolute; left: 0; right: 0; bottom: 0; height: 96px; background: var(--blanc); display: flex; align-items: center; gap: 70px; padding: 0 128px; font-size: 26px; white-space: nowrap; }
+  .trust span::before { content: "✔ "; }
+  .deco { position: absolute; pointer-events: none; }
+  .burst { position: absolute; display: grid; place-items: center; }
+  .burst svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .burst b { position: relative; font-family: var(--groovy); font-weight: 900; font-variation-settings: "SOFT" 100, "WONK" 1; color: var(--blanc); text-align: center; line-height: .95; transform: rotate(12deg); }
+  .note { margin-top: auto; padding-top: 22px; font-size: 21px; color: var(--gris); display: flex; gap: 12px; align-items: center; }
+  .note svg { width: 20px; height: 20px; flex: none; }
+  .noir .note, .rose .note { color: #FFD6EA; }
+  .tag { display: inline-block; background: var(--noir); color: var(--blanc); font-size: 17px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 8px 18px; border-radius: 999px; }
+  .foot { position: absolute; left: 128px; right: 128px; bottom: 44px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; color: var(--gris); pointer-events: none; }
+  .foot img { height: 34px; }
+  .noir .foot, .rose .foot { color: rgba(255,255,255,.7); }
+  .nofoot .foot { display: none; }
+
+  /* Diviseurs de partie */
+  .div { justify-content: center; }
+  .div .big { font-family: var(--groovy); font-weight: 900; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: 220px; line-height: .9; color: var(--blanc); }
+  .div h2 { color: var(--blanc); font-size: 110px; margin-top: 10px; }
+  .div .lead { color: #FFE3F0; font-size: 36px; }
+
+  /* Chronologie des flux */
+  .steps { display: grid; gap: 0; width: 100%; }
+  .step { display: grid; grid-template-columns: 170px 1fr; gap: 28px; padding: 24px 0; border-top: 1px solid var(--rose-clair); align-items: baseline; }
+  .step .j { font-family: var(--groovy); font-weight: 900; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: 50px; color: var(--rose); }
+  .step p { font-size: 28px; line-height: 1.4; }
+  .step p small { display: block; font-size: 22px; color: var(--gris); margin-top: 4px; }
+
+  #nav { position: fixed; inset: 0; display: flex; } #nav div { flex: 1; cursor: pointer; }
+  #hud { position: fixed; left: 50%; top: 8px; transform: translateX(-50%); color: #8E8E93; font: 12px var(--corps); transition: opacity .6s; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 0C12.9 7.6 16.4 11.1 24 12C16.4 12.9 12.9 16.4 12 24C11.1 16.4 7.6 12.9 0 12C7.6 11.1 11.1 7.6 12 0Z" fill="currentColor"/></symbol>
+  <symbol id="star-g" viewBox="0 0 24 24"><path d="M12 0C12.9 7.6 16.4 11.1 24 12C16.4 12.9 12.9 16.4 12 24C11.1 16.4 7.6 12.9 0 12C7.6 11.1 11.1 7.6 12 0Z" fill="#2A2426" stroke="#FBB8D6" stroke-width="1.4"/></symbol>
+  <symbol id="burst" viewBox="0 0 200 200"><path fill="currentColor" d="M100 0 L117 52 L165 18 L150 72 L200 70 L160 104 L196 140 L144 136 L150 190 L112 150 L90 200 L78 146 L30 180 L50 128 L0 118 L46 92 L10 50 L64 60 L60 6 L92 46 Z"/></symbol>
+</svg>
+<div id="nav"><div id="prev"></div><div id="next"></div></div>
+<div id="stage">
+
+<!-- 1 Couverture -->
+<section class="s nofoot" style="padding:0;flex-direction:row;background:var(--blanc)">
+  <div style="flex:1;display:flex;flex-direction:column;padding:90px 0 190px 128px;background:var(--rose-pale)">
+    <img src="assets/logo-halo-room.png" alt="Halo Room" style="height:110px;width:auto;align-self:flex-start">
+    <div style="margin-top:auto">
+      <div class="kicker"><svg><use href="#star"/></svg>CRM Week, ESD M2 · Pitch du 25 septembre 2026</div>
+      <h1>Stratégie d'acquisition <em>CRM</em></h1>
+      <p class="lead" style="font-size:36px">Pour le lancement du e-commerce Halo Room</p>
+      <p style="font-size:26px;margin-top:40px;font-weight:500">Charles Neveu · Paolina Roiatti · Jack Palleau</p>
+    </div>
+  </div>
+  <div style="width:780px;padding:90px 128px 190px 60px;background:var(--rose-pale);display:flex">
+    <div class="photo" style="width:100%;height:100%;border-radius:64px"><img src="assets/hero-oreille.jpg" alt=""></div>
+  </div>
+  <div class="burst" style="width:260px;height:260px;right:80px;top:40px;color:var(--rose)"><svg><use href="#burst"/></svg><b style="font-size:48px">10 min</b></div>
+  <div class="trust"><span>Titane ASTM F136</span><span>Sélectionnés par une perceuse professionnelle</span><span>Ouverture le 20 octobre</span><span>Essonne</span></div>
+</section>
+
+<!-- 2 Sommaire -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Sommaire</div>
+  <h2>Voici comment nous allons <em>résoudre le problème</em></h2>
+  <div class="body">
+    <div class="grid g3" style="gap:24px">
+      <div class="card"><div class="num">01</div><h3>Le contexte et le problème</h3></div>
+      <div class="card"><div class="num">02</div><h3>Notre stratégie d'acquisition</h3></div>
+      <div class="card"><div class="num">03</div><h3>Notre cible</h3></div>
+      <div class="card"><div class="num">04</div><h3>Notre dispositif CRM</h3></div>
+      <div class="card"><div class="num">05</div><h3>Nos automatisations</h3></div>
+      <div class="card r"><div class="num">06</div><h3>Nos KPI et notre plan d'action</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 Contexte -->
+<section class="s blanc">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 1 · Contexte</div>
+  <div class="body" style="margin-top:0;align-items:stretch">
+    <div style="flex:1;display:flex;flex-direction:column">
+      <h2>Une perceuse lance <em>son e-commerce</em></h2>
+      <p class="lead">Halo Room arrive à un moment charnière : l'ouverture de sa boutique en ligne, le 20 octobre 2026.</p>
+      <div class="grid g2" style="margin-top:50px;gap:20px">
+        <div class="card"><div class="lab"><svg><use href="#star"/></svg>Lancement</div><p>Boutique en ligne pas encore ouverte, zéro client.</p></div>
+        <div class="card"><div class="lab"><svg><use href="#star"/></svg>Équipe</div><p>Camille et une toute petite équipe.</p></div>
+        <div class="card"><div class="lab"><svg><use href="#star"/></svg>Budget</div><p>Limité : chaque euro doit ramener un contact.</p></div>
+        <div class="card r"><div class="lab"><svg><use href="#star"/></svg>Besoin</div><p>Générer ses premiers prospects avant l'ouverture.</p></div>
+      </div>
+    </div>
+    <div class="photo" style="width:560px"><img src="assets/hero-oreille.jpg" alt=""></div>
+  </div>
+</section>
+
+<!-- 4 Problème -->
+<section class="s noir">
+  <div class="kicker"><svg><use href="#star"/></svg>Le problème</div>
+  <div style="margin-top:auto;margin-bottom:auto">
+    <h1 style="font-size:190px">Lancement <span class="groovy">≠</span><br><em>acquisition</em></h1>
+    <p class="lead" style="font-size:40px;margin-top:50px;max-width:1300px">Comment générer suffisamment de prospects qualifiés avec des ressources limitées ?</p>
+  </div>
+  <svg class="deco" style="right:170px;top:170px;width:220px;height:220px;color:var(--rose)"><use href="#star"/></svg>
+  <svg class="deco" style="right:400px;top:420px;width:80px;height:80px;color:var(--rose-clair)"><use href="#star"/></svg>
+</section>
+
+<!-- 5 Problématique -->
+<section class="s rose">
+  <div class="kicker" style="color:var(--blanc)"><svg><use href="#star"/></svg>La problématique</div>
+  <div style="margin-top:auto;margin-bottom:auto;position:relative">
+    <div class="groovy" style="color:var(--blanc);font-size:260px;line-height:.6;position:absolute;left:-20px;top:-200px;opacity:.35">«</div>
+    <h2 style="font-size:96px;color:var(--blanc);max-width:1600px;position:relative">Comment utiliser le CRM pour transformer les visiteurs du nouveau e-commerce Halo Room en <em>prospects qualifiés</em>, puis en clientes ?</h2>
+  </div>
+</section>
+
+<!-- 6 Objectif -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 1 · Notre objectif</div>
+  <h2>Notre priorité est <em>l'acquisition</em></h2>
+  <p class="lead">Construire une base de leads qualifiés pour alimenter le lancement du e-commerce.</p>
+  <div class="body" style="flex-direction:column;gap:50px">
+    <div class="flow"><span class="pill w">Attirer</span><span class="arr">→</span><span class="pill w">Capturer</span><span class="arr">→</span><span class="pill">Qualifier</span><span class="arr">→</span><span class="pill w">Convertir</span></div>
+    <div class="grid g3">
+      <div class="card"><div class="num">300</div><p>inscrites en quatre semaines</p></div>
+      <div class="card"><div class="num">20 %</div><p>de leads qualifiés</p></div>
+      <div class="card r"><div class="num">5 %</div><p>de premières commandes le week-end d'ouverture</p></div>
+    </div>
+  </div>
+  <p class="note"><svg style="color:var(--rose)"><use href="#star"/></svg>Objectifs de départ, recalibrés après la première semaine.</p>
+</section>
+
+<!-- 7 Stratégie -->
+<section class="s blanc">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 1 · Notre stratégie</div>
+  <h2>Un tunnel d'acquisition <em>CRM</em></h2>
+  <p class="lead">Chaque étape alimente la suivante, et chaque étape se mesure.</p>
+  <div class="body" style="align-items:center">
+    <div class="flow" style="max-width:1660px">
+      <span class="pill ghost">Trafic</span><span class="arr">→</span><span class="pill ghost">Landing page</span><span class="arr">→</span><span class="pill ghost">Lead magnet</span><span class="arr">→</span><span class="pill ghost">Formulaire</span><span class="arr">→</span><span class="pill">Base CRM</span><span class="arr">→</span><span class="pill ghost">Segmentation et scoring</span><span class="arr">→</span><span class="pill ghost">Nurturing</span><span class="arr">→</span><span class="pill">Conversion</span>
+    </div>
+  </div>
+</section>
+
+<!-- 8 Approche -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 1 · Notre approche</div>
+  <h2>Partir des utilisatrices, <em>pas de suppositions</em></h2>
+  <div class="body">
+    <div class="grid g6" style="gap:18px">
+      <div class="card" style="padding:34px 28px"><div class="num" style="font-size:70px">1</div><p style="color:var(--noir);font-weight:600">Recherche utilisateur</p></div>
+      <div class="card" style="padding:34px 28px"><div class="num" style="font-size:70px">2</div><p style="color:var(--noir);font-weight:600">Définition du persona</p></div>
+      <div class="card" style="padding:34px 28px"><div class="num" style="font-size:70px">3</div><p style="color:var(--noir);font-weight:600">Construction du parcours</p></div>
+      <div class="card r" style="padding:34px 28px"><div class="num" style="font-size:70px">4</div><p style="font-weight:600">Dispositifs d'acquisition</p></div>
+      <div class="card r" style="padding:34px 28px"><div class="num" style="font-size:70px">5</div><p style="font-weight:600">Automatisation CRM</p></div>
+      <div class="card" style="padding:34px 28px"><div class="num" style="font-size:70px">6</div><p style="color:var(--noir);font-weight:600">Mesure et optimisation</p></div>
+    </div>
+  </div>
+  <p class="note"><svg style="color:var(--rose)"><use href="#star"/></svg>En rose : ce qui est déjà monté et en ligne cette semaine.</p>
+</section>
+
+<!-- 9 Diviseur partie 2 -->
+<section class="s rose div">
+  <div class="big">02</div>
+  <h2>Comprendre <em>la cible</em></h2>
+  <p class="lead">Avant de construire la stratégie, nous devons comprendre les prospects.</p>
+  <svg class="deco" style="right:200px;top:260px;width:360px;height:360px;color:var(--blanc);opacity:.9"><use href="#star"/></svg>
+</section>
+
+<!-- 10 Recherche -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 2 · Recherche utilisateur</div>
+  <h2>Le protocole et <em>le guide d'entretien</em></h2>
+  <div class="body">
+    <div class="card" style="width:560px;flex:none">
+      <div class="lab"><svg><use href="#star"/></svg>Le protocole</div>
+      <p><b style="color:var(--noir)">Qui :</b> 4 à 5 femmes de 18 à 30 ans, percées ou en projet.</p>
+      <p><b style="color:var(--noir)">Durée :</b> 15 minutes, visio ou téléphone.</p>
+      <p><b style="color:var(--noir)">Comment :</b> une personne mène, une autre note.</p>
+      <p><b style="color:var(--noir)">But :</b> des mots, pas des chiffres.</p>
+    </div>
+    <ul class="stars" style="flex:1">
+      <li><svg><use href="#star-g"/></svg><span>Raconte-moi ton dernier piercing : où, pourquoi, comment tu as choisi le studio.</span></li>
+      <li><svg><use href="#star-g"/></svg><span>Comment s'est passée la cicatrisation ? Qu'est-ce qui t'a inquiétée ?</span></li>
+      <li><svg><use href="#star-g"/></svg><span>Où achètes-tu tes bijoux aujourd'hui, et à quel prix ?</span></li>
+      <li><svg><use href="#star-g"/></svg><span>Le titane ASTM F136, ça te dit quelque chose ?</span></li>
+      <li><svg><use href="#star-g"/></svg><span>Quels emails accepterais-tu de recevoir, à quelle fréquence ?</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 11 Enseignements -->
+<section class="s blanc">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 2 · Enseignements <span class="tag">Entretiens simulés</span></div>
+  <h2>Ce que les entretiens <em>nous apprennent</em></h2>
+  <div class="body">
+    <div class="grid g2" style="gap:22px">
+      <div class="card"><div class="lab"><svg><use href="#star"/></svg>4 sur 5</div><h3>L'info de cicatrisation est le premier besoin</h3><p>« Sur TikTok j'ai eu trois avis différents. »</p></div>
+      <div class="card"><div class="lab"><svg><use href="#star"/></svg>4 sur 5</div><h3>Le titane rassure quand on l'explique</h3><p>« Si on me dit que c'est ce qu'on met en chirurgie, je comprends tout de suite. »</p></div>
+      <div class="card"><div class="lab"><svg><use href="#star"/></svg>2 sur 5</div><h3>Les initiées exigent la norme</h3><p>« Quand le vendeur ne précise pas la matière, je passe mon chemin. »</p></div>
+      <div class="card r"><div class="lab"><svg><use href="#star"/></svg>5 sur 5</div><h3>Des emails rares et utiles</h3><p>« Un email de temps en temps, quand il y a un vrai truc. »</p></div>
+    </div>
+  </div>
+  <p class="note"><svg style="color:var(--rose)"><use href="#star"/></svg>Hypothèses de travail issues d'entretiens simulés, à valider par de vrais entretiens avant le lancement.</p>
+</section>
+
+<!-- 12 Persona -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 2 · Notre persona <span class="tag">Persona de synthèse</span></div>
+  <div class="body" style="margin-top:10px;align-items:stretch">
+    <div class="photo" style="width:520px;position:relative"><img src="assets/hero-oreille.jpg" alt=""></div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:26px">
+      <h2 style="font-size:96px"><span class="groovy" style="font-size:110px">Lola</span>, 24 ans</h2>
+      <p class="lead" style="margin-top:0">Île-de-France · un ou deux piercings · cicatrisation en cours</p>
+      <div class="grid g2" style="gap:18px">
+        <div class="card" style="padding:28px 30px"><div class="lab">Déclencheur</div><p>Une compo vue sur Instagram, un cadeau.</p></div>
+        <div class="card" style="padding:28px 30px"><div class="lab">Freins</div><p>Peur de l'infection, délais flous, conseils contradictoires.</p></div>
+        <div class="card" style="padding:28px 30px"><div class="lab">Canaux</div><p>TikTok, Instagram, sa perceuse. 20 à 50 € la pièce.</p></div>
+        <div class="card" style="padding:28px 30px"><div class="lab">Emails</div><p>Un guide utile, puis peu de messages.</p></div>
+      </div>
+      <p style="font-family:var(--titre);font-style:italic;font-size:40px;line-height:1.2">« Je veux juste savoir combien de temps ça prend vraiment, sans me faire dire n'importe quoi. »</p>
+    </div>
+  </div>
+</section>
+
+<!-- 13 Diviseur partie 3 -->
+<section class="s rose div">
+  <div class="big">03</div>
+  <h2>Construire <em>l'acquisition</em></h2>
+  <p class="lead">Des Ads à la landing page : comment nous transformons le trafic en leads.</p>
+  <svg class="deco" style="right:200px;top:260px;width:360px;height:360px;color:var(--blanc);opacity:.9"><use href="#star"/></svg>
+</section>
+
+<!-- 14 Ads -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 3 · Notre stratégie Ads</div>
+  <h2>600 € de test, <em>trois canaux</em></h2>
+  <p class="lead">Les Ads servent à générer du trafic qualifié vers la landing, pas à vendre à tout le monde. Du 5 au 19 octobre.</p>
+  <div class="body" style="flex-direction:column;gap:30px">
+    <div style="display:flex;height:74px;border-radius:999px;overflow:hidden;width:100%;font-size:26px;font-weight:600;color:var(--blanc)">
+      <div style="width:50%;background:var(--rose);display:flex;align-items:center;padding:0 34px">Meta · 300 €</div>
+      <div style="width:33%;background:var(--noir);display:flex;align-items:center;padding:0 34px">Google · 200 €</div>
+      <div style="width:17%;background:#B9A9B0;display:flex;align-items:center;padding:0 28px">ChatGPT · 100 €</div>
+    </div>
+    <div class="grid g3" style="gap:22px">
+      <div class="card"><div class="lab">Meta Ads · 50 %</div><p>Instagram et Facebook, Reels et Stories. Intérêts piercing et bijoux, lookalike dès 100 inscrites.</p><p style="color:var(--noir);font-weight:600">4 à 6 € par lead · 50 à 75 leads</p></div>
+      <div class="card"><div class="lab">Google Ads · 33 %</div><p>Recherche : « bijou piercing titane », « piercing Essonne ». On capte une intention existante.</p><p style="color:var(--noir);font-weight:600">≈ 5 € par lead · ≈ 40 leads</p></div>
+      <div class="card"><div class="lab">ChatGPT Ads · 17 %</div><p>Test sur les questions posées à l'assistant : cicatrisation, titane. Canal nouveau, on apprend.</p><p style="color:var(--noir);font-weight:600">8 à 12 € par lead · 8 à 12 leads</p></div>
+    </div>
+  </div>
+  <div class="burst" style="width:280px;height:280px;right:110px;top:70px;color:var(--rose)"><svg><use href="#burst"/></svg><b style="font-size:44px">100 à 130<br>leads</b></div>
+  <p class="note"><svg style="color:var(--rose)"><use href="#star"/></svg>Coûts en hypothèse. Le 12 octobre, le budget restant bascule vers le canal le moins cher par lead.</p>
+</section>
+
+<!-- 15 Créa et influence -->
+<section class="s blanc">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 3 · Stratégie créative</div>
+  <h2>Trois angles, <em>et des créatrices</em></h2>
+  <div class="body" style="flex-direction:column;gap:28px">
+    <div class="grid g3" style="gap:22px">
+      <div class="card"><div class="lab">Angle 1</div><h3>Produit</h3><p>Les pièces, en gros plan.</p></div>
+      <div class="card"><div class="lab">Angle 2</div><h3>Univers</h3><p>Le studio et Camille.</p></div>
+      <div class="card"><div class="lab">Angle 3</div><h3>Problème</h3><p>La cicatrisation qui traîne.</p></div>
+    </div>
+    <div class="grid g2" style="gap:22px">
+      <div class="card r"><div class="lab">Gifting · ≈ 200 € de produit</div><h3>8 micro-influenceuses</h3><p>5 000 à 30 000 abonnées. Une pièce en titane contre un Reel ou un TikTok, lien de la landing en bio, UTM par créatrice.</p></div>
+      <div class="card" style="background:var(--noir)"><div class="lab">Organique · dès le 28 septembre</div><h3 style="color:var(--blanc)">3 vidéos par semaine</h3><p style="color:#C9C9CE">Les mêmes sur TikTok et Instagram Reels : routine de cicatrisation, coulisses du studio, pièce en gros plan.</p></div>
+    </div>
+  </div>
+  <p class="note"><svg style="color:var(--rose)"><use href="#star"/></svg>3 concepts × 2 formats × 2 hooks × 2 CTA = 12 variantes testées en Ads.</p>
+</section>
+
+<!-- 16 Tunnel Ads vers CRM -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 3 · Le tunnel Ads vers CRM</div>
+  <h2>Chaque euro investi <em>alimente le CRM</em></h2>
+  <div class="body" style="flex-direction:column;justify-content:center;gap:50px">
+    <div class="flow"><span class="pill w">Publicité</span><span class="arr">→</span><span class="pill w">Landing page</span><span class="arr">→</span><span class="pill w">Lead magnet</span><span class="arr">→</span><span class="pill w">Formulaire</span><span class="arr">→</span><span class="pill">Klaviyo</span><span class="arr">→</span><span class="pill w">Nurturing</span><span class="arr">→</span><span class="pill">Cliente</span></div>
+    <p class="lead" style="max-width:1300px">Nous ne faisons pas juste « des Ads » : toutes les créas envoient vers la landing, jamais vers le store, et chaque canal a ses UTM pour mesurer son coût par lead.</p>
+  </div>
+</section>
+
+<!-- 17 Proposition de valeur -->
+<section class="s noir">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 3 · Proposition de valeur</div>
+  <div class="body" style="margin-top:0;align-items:stretch">
+    <div style="flex:1">
+      <h2>Le titane des implants, <em style="color:var(--rose)">choisi par une perceuse</em></h2>
+      <div class="grid g2" style="margin-top:50px;gap:20px">
+        <div class="card"><div class="lab">Cible</div><p>Femmes de 18 à 30 ans, sud Île-de-France, percées ou en projet, sensibles aux matériaux.</p></div>
+        <div class="card"><div class="lab">Promesse</div><p>Des bijoux en titane ASTM F136, choisis par une professionnelle, avant tout le monde.</p></div>
+        <div class="card"><div class="lab">Échange</div><p>Son email contre le guide, 3 jours d'accès anticipé et 10 % le jour J.</p></div>
+        <div class="card"><div class="lab">KPI principal</div><p>Taux de conversion visiteuse vers inscrite.</p></div>
+      </div>
+    </div>
+    <div class="photo" style="width:480px"><img src="assets/hero-oreille.jpg" alt=""></div>
+  </div>
+</section>
+
+<!-- 18 Lead magnet -->
+<section class="s" style="background:#FFF0F6">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 3 · Notre lead magnet</div>
+  <div class="body" style="margin-top:0;align-items:stretch;gap:70px">
+    <div style="flex:1;display:flex;flex-direction:column">
+      <div class="groovy" style="font-size:120px;line-height:.95">Le guide de cicatrisation</div>
+      <p style="font-family:var(--titre);font-style:italic;font-size:54px;margin-top:10px">zone par zone</p>
+      <div style="display:grid;gap:0;margin-top:44px;max-width:760px">
+        <div class="step" style="grid-template-columns:1fr auto"><p><b>Lobe</b></p><p>6 à 8 semaines</p></div>
+        <div class="step" style="grid-template-columns:1fr auto"><p><b>Nez et septum</b></p><p>4 à 6 mois</p></div>
+        <div class="step" style="grid-template-columns:1fr auto"><p><b>Nombril</b></p><p>6 à 9 mois</p></div>
+        <div class="step" style="grid-template-columns:1fr auto"><p><b>Cartilage</b></p><p>6 à 12 mois</p></div>
+      </div>
+      <div style="margin-top:auto"><span class="pill">Je veux mon accès anticipé</span></div>
+    </div>
+    <ul class="stars" style="width:640px;flex:none;align-content:center">
+      <li><svg><use href="#star-g"/></svg><span><b>Promesse :</b> la routine et les vrais délais, pour chaque piercing.</span></li>
+      <li><svg><use href="#star-g"/></svg><span><b>Contenu :</b> le PDF de Camille, envoyé dès l'inscription.</span></li>
+      <li><svg><use href="#star-g"/></svg><span><b>Bénéfice :</b> une réponse immédiate à la première inquiétude après un piercing.</span></li>
+    </ul>
+  </div>
+  <div class="burst" style="width:230px;height:230px;right:90px;top:50px;color:var(--rose)"><svg><use href="#burst"/></svg><b style="font-size:54px">NEW</b></div>
+</section>
+
+<!-- 19 Landing -->
+<section class="s blanc">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 3 · La landing page</div>
+  <div class="body" style="margin-top:0;align-items:stretch;gap:60px">
+    <div style="flex:1;display:flex;flex-direction:column">
+      <h2>Une seule sortie : <em>le formulaire</em></h2>
+      <p class="lead">En ligne et fonctionnelle : halo-room-crm.pages.dev</p>
+      <ul class="stars" style="margin-top:40px">
+        <li><svg><use href="#star-g"/></svg><span>Logo seul, pas de navigation, un seul CTA répété trois fois.</span></li>
+        <li><svg><use href="#star-g"/></svg><span>Hero : date, titre, trois puces, formulaire visible sans scroller.</span></li>
+        <li><svg><use href="#star-g"/></svg><span>Formulaire en deux étapes : +21 % de conversion (Unbounce).</span></li>
+        <li><svg><use href="#star-g"/></svg><span>Preuves, guide zone par zone, Camille, dernier appel.</span></li>
+      </ul>
+    </div>
+    <div class="phone" style="align-self:center"><img src="assets/deck/landing-mobile.jpg" alt="Landing sur mobile"></div>
+    <div class="phone" style="align-self:center;height:640px;width:310px"><img src="assets/deck/merci-mobile.jpg" alt="Page merci"></div>
+  </div>
+</section>
+
+<!-- 20 Formulaires -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 3 · Les 3 formulaires</div>
+  <h2>Capturer, qualifier, <em>identifier l'intention</em></h2>
+  <div class="body" style="gap:40px">
+    <div class="grid" style="flex:1;gap:20px">
+      <div class="card" style="grid-template-columns:110px 1fr;align-items:center"><div class="num">1</div><div><h3>Capturer</h3><p>Étape 1 de la landing : prénom et email. Inscription immédiate, score 10.</p></div></div>
+      <div class="card" style="grid-template-columns:110px 1fr;align-items:center"><div class="num">2</div><div><h3>Qualifier</h3><p>Étape 2 : « ta situation » en trois boutons. Score 20, déclenche le nurturing.</p></div></div>
+      <div class="card r" style="grid-template-columns:110px 1fr;align-items:center"><div class="num">3</div><div><h3>Identifier l'intention</h3><p>Flyout Klaviyo à 50 % de scroll : « RDV ou bijou ? » puis email.</p></div></div>
+    </div>
+    <div class="phone" style="height:680px;width:330px"><img src="assets/deck/form-etape2.jpg" alt="Étape 2 du formulaire"></div>
+  </div>
+</section>
+
+<!-- 21 Diviseur partie 4 -->
+<section class="s rose div">
+  <div class="big">04</div>
+  <h2>Le <em>CRM</em></h2>
+  <p class="lead">Tous les leads captés sont centralisés, segmentés et notés dans Klaviyo.</p>
+  <svg class="deco" style="right:200px;top:260px;width:360px;height:360px;color:var(--blanc);opacity:.9"><use href="#star"/></svg>
+</section>
+
+<!-- 22 Base -->
+<section class="s blanc">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 4 · La base CRM</div>
+  <h2>Ce qu'on sait <em>de chaque lead</em></h2>
+  <div class="body">
+    <div class="tbl"><table>
+      <tr><th>Donnée</th><th>D'où elle vient</th><th>À quoi elle sert</th></tr>
+      <tr><td>Prénom, email</td><td>Étape 1 du formulaire</td><td>Personnalisation, envoi</td></tr>
+      <tr><td>Situation</td><td>Étape 2 : cicatrisation, nouveau, bijou</td><td>Déclenche le flux 2, pèse dans le scoring</td></tr>
+      <tr><td>Source d'inscription</td><td>Posée par la landing, UTM</td><td>Savoir quel canal apporte les leads</td></tr>
+      <tr><td>Lead score</td><td>Landing puis flux</td><td>Segments nouveau, engagé, qualifié</td></tr>
+      <tr><td>Date de lancement</td><td>Posée à l'inscription</td><td>Déclencheur du flux 3</td></tr>
+      <tr><td>Ouvertures, clics</td><td>Klaviyo, automatique</td><td>Conditions des flux</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- 23 Segmentation -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 4 · La segmentation</div>
+  <h2>Tous les prospects ne reçoivent pas <em>le même message</em></h2>
+  <div class="body" style="flex-direction:column;gap:26px">
+    <div class="grid g3" style="gap:22px">
+      <div class="card"><div class="lab">Score sous 20</div><h3>Nouveau lead</h3><p>Bienvenue et campagne J-7.</p></div>
+      <div class="card"><div class="lab">Score 20 à 44</div><h3>Lead engagé</h3><p>Nurturing si cicatrisation, campagne, ouverture.</p></div>
+      <div class="card r"><div class="lab">Score 45 et plus</div><h3>Lead qualifié</h3><p>Seul à recevoir le flux 3 : accès anticipé et code.</p></div>
+    </div>
+    <div class="card" style="grid-template-columns:auto 1fr;align-items:center;gap:24px;background:var(--noir)"><svg style="width:40px;height:40px;color:var(--rose)"><use href="#star"/></svg><p style="color:#E5E5EA">Plus un segment technique « piercing en cours de cicatrisation », qui déclenche le flux 2.</p></div>
+  </div>
+</section>
+
+<!-- 24 Scoring -->
+<section class="s blanc">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 4 · Le lead scoring</div>
+  <h2>Nous repérons automatiquement <em>les plus intéressées</em></h2>
+  <div class="body">
+    <div class="tbl"><table>
+      <tr><th>Action</th><th>Points</th><th>Score atteint</th><th>Qui le pose</th></tr>
+      <tr><td>Inscription (étape 1)</td><td>+10</td><td>10</td><td>Landing</td></tr>
+      <tr><td>Réponse « ta situation » (étape 2)</td><td>+10</td><td>20</td><td>Landing</td></tr>
+      <tr><td>Clic dans un mail de bienvenue</td><td>+15</td><td>35</td><td>Flux 1</td></tr>
+      <tr><td>Situation cicatrisation ou bijou, et clic</td><td>+15</td><td>50</td><td>Flux 1</td></tr>
+      <tr><td>Clic sur les pièces</td><td>+15</td><td>50</td><td>Flux 2</td></tr>
+      <tr><td>Aucun clic sur les 3 mails</td><td>−10</td><td>10</td><td>Flux 1</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- 25 Diviseur partie 5 -->
+<section class="s rose div">
+  <div class="big">05</div>
+  <h2><em>Nurturing</em></h2>
+  <p class="lead">Une prospecte n'est pas forcément prête à acheter tout de suite.</p>
+  <svg class="deco" style="right:200px;top:260px;width:360px;height:360px;color:var(--blanc);opacity:.9"><use href="#star"/></svg>
+</section>
+
+<!-- 26 Stratégie nurturing -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 5 · Notre stratégie de nurturing</div>
+  <h2>Utile d'abord, <em>l'offre ensuite</em></h2>
+  <div class="body" style="flex-direction:column;gap:50px">
+    <div class="flow"><span class="pill w">Lead</span><span class="arr">→</span><span class="pill w">Contenu utile</span><span class="arr">→</span><span class="pill w">Réassurance</span><span class="arr">→</span><span class="pill w">Découverte produit</span><span class="arr">→</span><span class="pill w">Offre</span><span class="arr">→</span><span class="pill">Conversion</span></div>
+    <div class="grid g3" style="gap:22px">
+      <div class="card"><div class="num">10</div><p>emails écrits à la main, sans template</p></div>
+      <div class="card"><div class="num">3</div><p>flux automatisés : bienvenue, cicatrisation, lancement</p></div>
+      <div class="card r"><div class="num">1</div><p>campagne d'avant-première, sept jours avant</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 27 Workflow 1 -->
+<section class="s blanc">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 5 · Workflow 1</div>
+  <div class="body" style="margin-top:0;align-items:stretch;gap:70px">
+    <div style="flex:1">
+      <h2>Bienvenue : <em>tenir la promesse</em></h2>
+      <p class="lead" style="font-size:28px">Déclencheur : ajout à la liste « Waitlist lancement Halo Room ».</p>
+      <div class="steps" style="margin-top:36px">
+        <div class="step"><span class="j">J0</span><p>Ton guide de cicatrisation<small>Le PDF et les délais par zone</small></p></div>
+        <div class="step"><span class="j">J+2</span><p>Pourquoi je ne pose que du titane ASTM F136</p></div>
+        <div class="step"><span class="j">J+5</span><p>Le 20 octobre, voilà comment ça se passe</p></div>
+        <div class="step"><span class="j">J+6</span><p>Branche : a cliqué ? Score 35 à 50, sinon 10</p></div>
+      </div>
+    </div>
+    <div class="shot" style="width:500px;align-self:center"><img src="assets/deck/mail-f1m1.jpg" alt="Email J0"></div>
+  </div>
+</section>
+
+<!-- 28 Workflow 2 -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 5 · Workflow 2</div>
+  <div class="body" style="margin-top:0;align-items:stretch;gap:70px">
+    <div style="flex:1">
+      <h2>Cicatrisation : <em>être là au bon moment</em></h2>
+      <p class="lead" style="font-size:28px">Déclencheur : entrée dans le segment « piercing en cours de cicatrisation ».</p>
+      <div class="steps" style="margin-top:36px">
+        <div class="step"><span class="j">J0</span><p>Les 15 premiers jours de ton piercing<small>La routine matin et soir</small></p></div>
+        <div class="step"><span class="j">J+7</span><p>Les erreurs qui rallongent une cicatrisation</p></div>
+        <div class="step"><span class="j">J+21</span><p>Quand changer ton bijou, et pour quoi</p></div>
+        <div class="step"><span class="j">J+23</span><p>Branche : a cliqué sur les pièces ? Score 50</p></div>
+      </div>
+    </div>
+    <div class="shot" style="width:500px;align-self:center"><img src="assets/deck/mail-f2m2.jpg" alt="Email J+7"></div>
+  </div>
+</section>
+
+<!-- 29 Workflow 3 -->
+<section class="s blanc">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 5 · Workflow 3</div>
+  <div class="body" style="margin-top:0;align-items:stretch;gap:70px">
+    <div style="flex:1">
+      <h2>Lancement : <em>convertir les qualifiées</em></h2>
+      <p class="lead" style="font-size:28px">Déclencheur : par date, 3 jours avant le 20 octobre, filtré sur un score de 45 et plus.</p>
+      <div class="steps" style="margin-top:36px">
+        <div class="step"><span class="j">17/10</span><p>Ton accès anticipé est ouvert<small>Le lien du store, trois jours avant tout le monde</small></p></div>
+        <div class="step"><span class="j">20/10</span><p>C'est ouvert : ton code est actif<small>HALO10, 10 % jusqu'au 23</small></p></div>
+        <div class="step"><span class="j">23/10</span><p>Dernier jour pour ton code<small>Rappel court, sans pression</small></p></div>
+      </div>
+    </div>
+    <div class="shot" style="width:500px;align-self:center"><img src="assets/deck/mail-f3m2.jpg" alt="Email du 20 octobre"></div>
+  </div>
+</section>
+
+<!-- 30 Campagne -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 5 · La campagne</div>
+  <div class="body" style="margin-top:0;align-items:stretch;gap:70px">
+    <div style="flex:1">
+      <h2>L'avant-première, <em>sept jours avant</em></h2>
+      <ul class="stars" style="margin-top:44px">
+        <li><svg><use href="#star-g"/></svg><span><b>Concept :</b> montrer les premières pièces, une semaine avant l'ouverture.</span></li>
+        <li><svg><use href="#star-g"/></svg><span><b>Cible :</b> toute la liste d'attente, quel que soit le score.</span></li>
+        <li><svg><use href="#star-g"/></svg><span><b>Offre :</b> rappel du code 10 % du 20 au 23 et du parrainage.</span></li>
+        <li><svg><use href="#star-g"/></svg><span><b>Envoi :</b> mardi 13 octobre, 10 h. Programmée dans Klaviyo, ses clics nourrissent le scoring.</span></li>
+      </ul>
+    </div>
+    <div class="shot" style="width:500px;align-self:center"><img src="assets/deck/mail-camp.jpg" alt="Email de campagne"></div>
+  </div>
+</section>
+
+<!-- 31 Diviseur partie 6 -->
+<section class="s rose div">
+  <div class="big">06</div>
+  <h2><em>Pilotage</em></h2>
+  <p class="lead">Nous mesurons chaque étape du tunnel, et voici comment nous passons à l'exécution.</p>
+  <svg class="deco" style="right:200px;top:260px;width:360px;height:360px;color:var(--blanc);opacity:.9"><use href="#star"/></svg>
+</section>
+
+<!-- 32 KPI -->
+<section class="s blanc">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 6 · Les KPI</div>
+  <h2>Une mesure <em>par étape du tunnel</em></h2>
+  <div class="body">
+    <div class="tbl"><table>
+      <tr><th>Étape</th><th>Indicateur</th><th>Repère visé</th></tr>
+      <tr><td>Acquisition</td><td>Inscriptions, conversion de la landing, coût par lead par canal</td><td>Médiane 6,6 %, visé 10 %</td></tr>
+      <tr><td>Acquisition</td><td>Complétion de l'étape 2</td><td>60 % et plus</td></tr>
+      <tr><td>Qualification</td><td>Ouvertures, clics par email</td><td>40 % d'ouverture, 3 à 5 % de clic</td></tr>
+      <tr><td>Qualification</td><td>Part de leads qualifiés</td><td>15 à 25 % avant le 17 octobre</td></tr>
+      <tr><td>Conversion</td><td>Commandes HALO10, lead vers client</td><td>5 % des inscrites</td></tr>
+      <tr><td>Hygiène</td><td>Désinscriptions, plaintes</td><td>Moins de 0,5 % par envoi</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- 33 Plan d'action -->
+<section class="s">
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 6 · Le plan d'action</div>
+  <h2>De la stratégie <em>à l'ouverture</em></h2>
+  <div class="body" style="align-items:center">
+    <div class="grid g4" style="gap:22px">
+      <div class="card"><div class="lab"><svg><use href="#star"/></svg>28 septembre</div><p>Landing sur le domaine, Klaviyo en live, flyout, premières vidéos, bijoux envoyés aux créatrices.</p></div>
+      <div class="card"><div class="lab"><svg><use href="#star"/></svg>5 octobre</div><p>Ads Meta, Google et ChatGPT (600 €), vrais avis clientes, premier point KPI.</p></div>
+      <div class="card r"><div class="lab"><svg><use href="#star"/></svg>13 au 23 octobre</div><p>Avant-première le 13, accès anticipé le 17, ouverture et code le 20.</p></div>
+      <div class="card"><div class="lab"><svg><use href="#star"/></svg>26 octobre</div><p>Bilan, premier test A/B sur le titre, flux post-achat.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 34 Conclusion -->
+<section class="s noir nofoot">
+  <img src="assets/logo-halo-room.png" alt="Halo Room" style="height:100px;width:auto;align-self:flex-start">
+  <div style="margin-top:auto">
+    <div class="kicker"><svg><use href="#star"/></svg>Conclusion</div>
+    <h2 style="font-size:88px;max-width:1500px">Faire du lancement de Halo Room une première base de <em style="color:var(--rose)">prospects qualifiés</em>, grâce au CRM.</h2>
+    <div class="flow" style="margin-top:56px"><span class="pill">Attirer</span><span class="arr">→</span><span class="pill">Capturer</span><span class="arr">→</span><span class="pill">Qualifier</span><span class="arr">→</span><span class="pill w">Convertir</span></div>
+    <p style="font-size:24px;color:#A1A1A6;margin-top:50px">Charles Neveu · Paolina Roiatti · Jack Palleau · Halo Room, Essonne</p>
+  </div>
+  <svg class="deco" style="right:170px;top:150px;width:260px;height:260px;color:var(--rose)"><use href="#star"/></svg>
+  <svg class="deco" style="right:440px;top:380px;width:90px;height:90px;color:var(--rose-clair)"><use href="#star"/></svg>
+</section>
+
+</div>
+<div id="hud"></div>
+<script>
+  var S = document.querySelectorAll('.s'), i = 0, stage = document.getElementById('stage'), hud = document.getElementById('hud');
+  S.forEach(function (s, k) { var f = document.createElement('div'); f.className = 'foot'; f.innerHTML = '<span>Halo Room · CRM Week ESD M2</span><span>' + String(k + 1).padStart(2, '0') + ' / ' + S.length + '</span>'; s.appendChild(f); });
+  function fit() { var r = Math.min(innerWidth / 1920, innerHeight / 1080); stage.style.transform = 'translate(-50%,-50%) scale(' + r + ')'; }
+  function go(n) { i = Math.max(0, Math.min(S.length - 1, n)); S.forEach(function (s, k) { s.classList.toggle('on', k === i); }); hud.textContent = '← → pour naviguer · F plein écran'; hud.style.opacity = i === 0 ? 1 : 0; try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {} }
+  addEventListener('keydown', function (e) {
+    if (['ArrowRight', 'ArrowDown', ' ', 'PageDown', 'Enter'].indexOf(e.key) > -1) { e.preventDefault(); go(i + 1); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].indexOf(e.key) > -1) { e.preventDefault(); go(i - 1); }
+    else if (e.key === 'Home') go(0); else if (e.key === 'End') go(S.length - 1);
+    else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+  });
+  document.getElementById('prev').onclick = function () { go(i - 1); };
+  document.getElementById('next').onclick = function () { go(i + 1); };
+  var tx = null; addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }); addEventListener('touchend', function (e) { if (tx === null) return; var d = e.changedTouches[0].clientX - tx; if (Math.abs(d) > 40) go(i + (d < 0 ? 1 : -1)); tx = null; });
+  addEventListener('resize', fit); fit(); go((parseInt(location.hash.slice(1), 10) || 1) - 1);
+</script>
+</body>
+</html>
