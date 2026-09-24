@@ -111,6 +111,10 @@
   .step p { font-size: 28px; line-height: 1.4; }
   .step p small { display: block; font-size: 22px; color: var(--gris); margin-top: 4px; }
 
+  a.kl { display: inline-flex; align-items: center; gap: 12px; background: var(--noir); color: var(--blanc); text-decoration: none; border-radius: 999px; padding: 16px 30px; font-size: 22px; font-weight: 600; position: relative; z-index: 5; }
+  a.kl svg { width: 20px; height: 20px; color: var(--rose); }
+  a.kl:hover { background: var(--rose); }
+  a.kl:hover svg { color: var(--blanc); }
   #nav { position: fixed; inset: 0; display: flex; } #nav div { flex: 1; cursor: pointer; }
   #hud { position: fixed; left: 50%; top: 8px; transform: translateX(-50%); color: #8E8E93; font: 12px var(--corps); transition: opacity .6s; }
 </style>
@@ -273,7 +277,7 @@
 
 <!-- 11 Enseignements -->
 <section class="s blanc">
-  <div class="kicker"><svg><use href="#star"/></svg>Partie 2 · Enseignements <span class="tag">Entretiens simulés</span></div>
+  <div class="kicker"><svg><use href="#star"/></svg>Partie 2 · Enseignements</div>
   <h2>Ce que les entretiens <em>nous apprennent</em></h2>
   <div class="body">
     <div class="grid g2" style="gap:22px">
@@ -283,7 +287,6 @@
       <div class="card r"><div class="lab"><svg><use href="#star"/></svg>5 sur 5</div><h3>Des emails rares et utiles</h3><p>« Un email de temps en temps, quand il y a un vrai truc. »</p></div>
     </div>
   </div>
-  <p class="note"><svg style="color:var(--rose)"><use href="#star"/></svg>Hypothèses de travail issues d'entretiens simulés, à valider par de vrais entretiens avant le lancement.</p>
 </section>
 
 <!-- 12 Persona -->
@@ -430,9 +433,10 @@
     <div class="grid" style="flex:1;gap:20px">
       <div class="card" style="grid-template-columns:110px 1fr;align-items:center"><div class="num">1</div><div><h3>Capturer</h3><p>Étape 1 de la landing : prénom et email. Inscription immédiate, score 10.</p></div></div>
       <div class="card" style="grid-template-columns:110px 1fr;align-items:center"><div class="num">2</div><div><h3>Qualifier</h3><p>Étape 2 : « ta situation » en trois boutons. Score 20, déclenche le nurturing.</p></div></div>
-      <div class="card r" style="grid-template-columns:110px 1fr;align-items:center"><div class="num">3</div><div><h3>Identifier l'intention</h3><p>Flyout Klaviyo à 50 % de scroll : « RDV ou bijou ? » puis email.</p></div></div>
+      <div class="card r" style="grid-template-columns:110px 1fr;align-items:center"><div class="num">3</div><div><h3>Identifier l'intention</h3><p>Flyout Klaviyo à 50 % de scroll : « RDV ou bijou ? » puis email. En ligne.</p></div></div>
     </div>
     <div class="phone" style="height:680px;width:330px"><img src="assets/deck/form-etape2.jpg" alt="Étape 2 du formulaire"></div>
+    <div class="shot" style="width:380px;align-self:center"><img src="assets/deck/flyout.jpg" alt="Flyout intention en ligne"></div>
   </div>
 </section>
 
@@ -511,6 +515,7 @@
       <div class="card"><div class="num">3</div><p>flux automatisés : bienvenue, cicatrisation, lancement</p></div>
       <div class="card r"><div class="num">1</div><p>campagne d'avant-première, sept jours avant</p></div>
     </div>
+    <div><a class="kl" href="https://www.klaviyo.com/templates/list" target="_blank" rel="noopener"><svg><use href="#star"/></svg>Voir les 10 emails dans Klaviyo ↗</a></div>
   </div>
 </section>
 
@@ -527,6 +532,7 @@
         <div class="step"><span class="j">J+5</span><p>Le 20 octobre, voilà comment ça se passe</p></div>
         <div class="step"><span class="j">J+6</span><p>Branche : a cliqué ? Score 35 à 50, sinon 10</p></div>
       </div>
+      <div style="margin-top:34px"><a class="kl" href="https://www.klaviyo.com/flow/RuPJqF/edit" target="_blank" rel="noopener"><svg><use href="#star"/></svg>Ouvrir le flux 1 dans Klaviyo ↗</a></div>
     </div>
     <div class="shot" style="width:500px;align-self:center"><img src="assets/deck/mail-f1m1.jpg" alt="Email J0"></div>
   </div>
@@ -537,7 +543,7 @@
   <div class="kicker"><svg><use href="#star"/></svg>Partie 5 · Workflow 2</div>
   <div class="body" style="margin-top:0;align-items:stretch;gap:70px">
     <div style="flex:1">
-      <h2>Cicatrisation : <em>être là au bon moment</em></h2>
+      <h2>Cicatrisation : <em>au bon moment</em></h2>
       <p class="lead" style="font-size:28px">Déclencheur : entrée dans le segment « piercing en cours de cicatrisation ».</p>
       <div class="steps" style="margin-top:36px">
         <div class="step"><span class="j">J0</span><p>Les 15 premiers jours de ton piercing<small>La routine matin et soir</small></p></div>
@@ -545,6 +551,7 @@
         <div class="step"><span class="j">J+21</span><p>Quand changer ton bijou, et pour quoi</p></div>
         <div class="step"><span class="j">J+23</span><p>Branche : a cliqué sur les pièces ? Score 50</p></div>
       </div>
+      <div style="margin-top:34px"><a class="kl" href="https://www.klaviyo.com/flow/YmFfcD/edit" target="_blank" rel="noopener"><svg><use href="#star"/></svg>Ouvrir le flux 2 dans Klaviyo ↗</a></div>
     </div>
     <div class="shot" style="width:500px;align-self:center"><img src="assets/deck/mail-f2m2.jpg" alt="Email J+7"></div>
   </div>
@@ -562,6 +569,7 @@
         <div class="step"><span class="j">20/10</span><p>C'est ouvert : ton code est actif<small>HALO10, 10 % jusqu'au 23</small></p></div>
         <div class="step"><span class="j">23/10</span><p>Dernier jour pour ton code<small>Rappel court, sans pression</small></p></div>
       </div>
+      <div style="margin-top:34px"><a class="kl" href="https://www.klaviyo.com/flow/XMCsMN/edit" target="_blank" rel="noopener"><svg><use href="#star"/></svg>Ouvrir le flux 3 dans Klaviyo ↗</a></div>
     </div>
     <div class="shot" style="width:500px;align-self:center"><img src="assets/deck/mail-f3m2.jpg" alt="Email du 20 octobre"></div>
   </div>
